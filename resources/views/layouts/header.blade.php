@@ -1,27 +1,57 @@
-<form class="form-inline mr-auto" action="#">
-    <ul class="navbar-nav mr-3">
-        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-    </ul>
-</form>
-<ul class="navbar-nav navbar-right">
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    @if(\Illuminate\Support\Facades\Auth::user())
-        <li class="dropdown">
-            <a href="#" data-toggle="dropdown"
-               class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ asset('img/logo.png') }}"
-                     class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
-                <div class="d-sm-none d-lg-inline-block">
-                    Hi, {{\Illuminate\Support\Facades\Auth::user()->first_name}}</div>
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Topbar Search -->
+    {{-- <form
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form> --}}
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        <!-- Nav Item - User Information -->
+        @if(\Illuminate\Support\Facades\Auth::user())
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    Hola, {{\Illuminate\Support\Facades\Auth::user()->name}}
+                </span>
+                <img class="img-profile rounded-circle"
+                    src="assets/images/undraw_profile.svg">
             </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
 
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">
-                    Welcome, {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
-                <a class="dropdown-item has-icon edit-profile" href="#" data-id="{{ \Auth::id() }}">
-                    <i class="fa fa-user"></i>Edit Profile</a>
-                <a class="dropdown-item has-icon" data-toggle="modal" data-target="#changePasswordModal" href="#" data-id="{{ \Auth::id() }}"><i
-                            class="fa fa-lock"> </i>Change Password</a>
                 <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
                    onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -31,23 +61,18 @@
                 </form>
             </div>
         </li>
-    @else
-        <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                {{--                <img alt="image" src="#" class="rounded-circle mr-1">--}}
-                <div class="d-sm-none d-lg-inline-block">{{ __('messages.common.hello') }}</div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">{{ __('messages.common.login') }}
-                    / {{ __('messages.common.register') }}</div>
-                <a href="{{ route('login') }}" class="dropdown-item has-icon">
-                    <i class="fas fa-sign-in-alt"></i> {{ __('messages.common.login') }}
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="{{ route('register') }}" class="dropdown-item has-icon">
-                    <i class="fas fa-user-plus"></i> {{ __('messages.common.register') }}
-                </a>
-            </div>
-        </li>
-    @endif
-</ul>
+        @else
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
+              </li>
+            </ul>
+        </div>
+
+        @endif
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->

@@ -1,82 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>@yield('title') | {{ config('app.name') }}</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 4.1.1 -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-    <!-- Ionicons -->
-    <link href="//fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin 2 - Dashboard</title>
+    <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
-    <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
-
-@yield('page_css')
-<!-- Template CSS -->
-    <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('web/css/components.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="{{ asset('assets/css/sb-admin-2.min.css') }}">
     @yield('page_css')
-
     @yield('css')
 </head>
-<body>
 
-<div id="app">
-    <div class="main-wrapper main-wrapper-1">
-        <div class="navbar-bg"></div>
-        <nav class="navbar navbar-expand-lg main-navbar">
-            @include('layouts.header')
-
-        </nav>
-        <div class="main-sidebar main-sidebar-postion">
-            @include('layouts.sidebar')
-        </div>
-        <!-- Main Content -->
-        <div class="main-content">
-            @yield('content')
-        </div>
-        <footer class="main-footer">
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        @include('layouts.sidebar')
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                @include('layouts.header')
+                @yield('content')
+            </div>
+            <!-- End of Main Content -->
             @include('layouts.footer')
-        </footer>
+        </div>
+        <!-- End of Content Wrapper -->
     </div>
-</div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@include('profile.change_password')
-@include('profile.edit_profile')
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('assets/js/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/chart-pie-demo.js') }}"></script>
 
 </body>
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
-<script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
-<script src="{{ asset('assets/js/select2.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 
-<!-- Template JS File -->
-<script src="{{ asset('web/js/stisla.js') }}"></script>
-<script src="{{ asset('web/js/scripts.js') }}"></script>
-<script src="{{ mix('assets/js/profile.js') }}"></script>
-<script src="{{ mix('assets/js/custom/custom.js') }}"></script>
-@yield('page_js')
-@yield('scripts')
-<script>
-    let loggedInUser =@json(\Illuminate\Support\Facades\Auth::user());
-    let loginUrl = '{{ route('login') }}';
-    const userUrl = '{{url('users')}}';
-    // Loading button plugin (removed from BS4)
-    (function ($) {
-        $.fn.button = function (action) {
-            if (action === 'loading' && this.data('loading-text')) {
-                this.data('original-text', this.html()).html(this.data('loading-text')).prop('disabled', true);
-            }
-            if (action === 'reset' && this.data('original-text')) {
-                this.html(this.data('original-text')).prop('disabled', false);
-            }
-        };
-    }(jQuery));
-</script>
 </html>
