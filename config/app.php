@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Spatie
         Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
 
     ],
 

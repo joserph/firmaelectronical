@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,9 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('users', UserController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('permissions', PermissionController::class);
+});
+
+Route::get('/hola', function(){
+    Storage::disk("google")->put("test.txt", "Hola esto es un test de google drive");
+    return "Firmeelectronica";
 });
