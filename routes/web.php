@@ -7,7 +7,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PermissionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -38,6 +37,6 @@ Route::group(['middleware' => ['auth']], function()
 });
 
 Route::get('/hola', function(){
-    Storage::disk("google")->put("test.txt", "Hola esto es un test de google drive");
+    Storage::disk("google")->put("test2.txt", "Hola esto es un test de google drive");
     return "Firmeelectronica";
 });
