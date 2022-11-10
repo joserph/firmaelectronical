@@ -19,6 +19,7 @@ class CreateTestsTable extends Migration
             $table->string('titulo');
             $table->string('contenido');
             $table->string('archivo');
+            $table->string('path');
 
             $table->timestamps();
         });

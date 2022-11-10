@@ -29,6 +29,7 @@
                                                 <th scope="row">{{ $blog->titulo }}</th>
                                                 <th scope="row">{{ $blog->contenido }}</th>
                                                 <td>
+                                                    <a href="{{ route('tests.show', $blog->id) }}">Ver</a>
                                                     @can('edit-blog')
                                                         <a class="btn btn-warning" href="{{ route('tests.edit', $blog->id) }}"><i class="far fa-edit"></i></a>
                                                     @endcan

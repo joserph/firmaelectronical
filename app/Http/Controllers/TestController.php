@@ -20,7 +20,8 @@ class TestController extends Controller
     public function index()
     {
         $tests = Test::paginate(10);
-
+        
+        
         return view('tests.index', compact('tests'));
     }
 
@@ -43,7 +44,7 @@ class TestController extends Controller
     public function store(Request $request)
     {
         $archivo = $request->file('archivo');
-        //$name = 'test_' . time() . '.' . $archivo->guessExtension();
+        $name = 'test_' . time() . '.' . $archivo->guessExtension();
 
         /***** */
         // $filename = 'test_' . time() . '.' . $archivo->guessExtension();
@@ -51,17 +52,35 @@ class TestController extends Controller
         // //dd($filePath);
         // $fileData = File::get($filePath);
 
-        // Storage::disk("google")->put($filename, $fileData);
-        $archivo->store('', 'google');
+        //Storage::disk("google")->put($name, $archivo);
+        $file = Storage::disk("google")->putFileAs("", $archivo, $name);
+
+        // Extraemos el path del archivo
+        $files = Storage::disk("google")->allFiles();
+        foreach($files as $f)
+        {
+            $detail = Storage::disk("google")->getMetadata($f);
+            if($file == $detail['name'])
+            {
+                $detail2 = Storage::disk("google")->getMetadata($f);
+            }
+        }
+        //dd($detail2);
+
+        //$name = $archivo->store('', 'google');
+        //dd($name);
         //$request->file('archivo')->store('', 'google');
-        return 'File was saved to Google Drive';
+        //return 'File was saved to Google Drive';
 
         /******* */
-        /*dd($name);
         Test::create([
             'titulo' => $request->titulo,
             'contenido' => $request->contenido,
-        ]);*/
+            'archivo' => $name,
+            'path' => $detail2['path']
+        ]);
+
+        return redirect()->route('tests.index');
     }
 
     /**
@@ -72,7 +91,25 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        $test = Test::find($id);
+        $files = Storage::disk("google")->allFiles();
+        // foreach($files as $f)
+        // {
+        //     $detail = Storage::disk("google")->getMetadata($f);
+        //     if($test->archivo == $detail['name'])
+        //     {
+        //         
+        //         $detail2 = Storage::disk("google")->getMetadata($f);
+        //     }
+        // }
+        $url =  Storage::disk("google")->url($test->path);
+        //dd($detail2);
+        // $path = explode("/", $files);
+        // $url = Storage::disk("google")->url($path[0]);
+        // $meta = Storage::disk("google")->getMetadata($path[0]);
+        // dd('https://drive.google.com/drive/u/0/folders/' . $files . '&export=media');
+
+        return view('tests.show', compact('test', 'url'));
     }
 
     /**
@@ -106,6 +143,12 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $test = Test::find($id);
+        // Eliminamos en Google drive
+        Storage::disk("google")->delete($test->path);
+        $test->delete();
+
+        return redirect()->route('tests.index');
+        
     }
 }
