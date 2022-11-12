@@ -9,9 +9,15 @@
     <div class="col-sm-12">
         <div class="form-group">
             {{ Form::label('contenido', 'Contenido') }}
-            <textarea name="contenido" class="form-control" style="height: 100px"></textarea>
+            {{ Form::textarea('contenido', null, ['class' => 'form-control']) }}
         </div>
     </div>
+    @isset($test)
+        <div class="col-sm-12">
+            <img src="{{ $url }}" class="img-fluid" alt="...">
+        </div>
+    @endisset
+    
     <div class="col-sm-12">
         <div class="form-group">
             <label for="exampleFormControlFile1">Example file input</label>
