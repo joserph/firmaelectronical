@@ -30,7 +30,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Persona Natural</a>
+                <a class="collapse-item" href="{{ route('natural-person.create') }}">Persona Natural</a>
                 <a class="collapse-item" href="#">Representante Legal</a>
                 <a class="collapse-item" href="#">Miembro de Empresa</a>
             </div>
@@ -69,7 +69,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Persona Natural</a>
+                <a class="collapse-item" href="{{ route('natural-person.create') }}">Persona Natural</a>
                 <a class="collapse-item" href="#">Representante Legal</a>
                 <a class="collapse-item" href="#">Miembro de Empresa</a>
             </div>
