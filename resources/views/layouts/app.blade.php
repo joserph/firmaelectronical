@@ -74,7 +74,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/chart-pie-demo.js') }}"></script>
-
+    @yield('page_js')
+    @yield('js')
 </body>
 
 </html>

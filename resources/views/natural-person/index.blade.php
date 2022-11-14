@@ -5,11 +5,11 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Pernosa Natural</li>
+          <li class="breadcrumb-item active" aria-current="page">Persona Natural</li>
         </ol>
     </nav>
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Pernosa Natural</h1>
+    <h1 class="h3 mb-2 text-gray-800">Persona Natural</h1>
     
     <div class="table-responsive">
         <table class="table table-hover table-bordered table-sm">
