@@ -15,31 +15,23 @@
     <h1 class="h3 mb-2 text-gray-800">Pernosa Natural</h1>
     
     <!-- //////////////// -->
-    <section class="signup-step-container">
-        <div class="container">
+    <br>
             <div class="row d-flex justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="wizard">
                         <div class="wizard-inner">
                             <div class="connecting-line"></div>
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">1 </span> <i>Step 1</i></a>
+                                <li role="presentation" id="li_step_1" class="active">
+                                    <a href="#step1" data-toggle="tab" id="step_1" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">1</span> <i>Datos Personales</i></a>
                                 </li>
-                                <li role="presentation" class="disabled">
-                                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">2</span> <i>Step 2</i></a>
+                                <li role="presentation" id="li_step_2" class="disabled">
+                                    <a href="#step2" data-toggle="tab" id="step_2" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">2</span> <i>Archivos Adjuntos</i></a>
                                 </li>
-                                {{-- <li role="presentation" class="disabled">
-                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span class="round-tab">3</span> <i>Step 3</i></a>
-                                </li>
-                                <li role="presentation" class="disabled">
-                                    <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab"><span class="round-tab">4</span> <i>Step 4</i></a>
-                                </li> --}}
                             </ul>
                         </div>
         
-                        <form role="form" id="natural__person__form" action="index.html" class="login-box">
-                        {{ Form::open(['route' => 'blogs.store', 'method' => 'POST']) }}
+                        {{ Form::open(['route' => 'blogs.store', 'method' => 'POST', 'id' => 'natural__person__form']) }}
                             <div class="tab-content" id="main_form">
                                 <div class="tab-pane active" role="tabpanel" id="step1">
                                     <h4 class="text-center">Step 1</h4>
@@ -78,7 +70,7 @@
                                         
                                     </div>
                                     <ul class="list-inline pull-right">
-                                        <li><button type="button" class="default-btn next-step">Continue to next step</button></li>
+                                        <li><button type="button" id="next-step" class="btn btn-primary">Siguiente</button></li>
                                     </ul>
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="step2">
@@ -123,8 +115,8 @@
                                     
                                     
                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                        <li><button type="button" class="default-btn next-step">Finish</button></li>
+                                        <li><button type="button" id="prev-step" class="btn btn-secondary">Atras</button></li>
+                                        <li><button type="submit" class="btn btn-success">Guardar</button></li>
                                     </ul>
                                 </div>
                                 
@@ -135,8 +127,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        
 
 </div>
 @section('page_js')

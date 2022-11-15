@@ -95,15 +95,15 @@ span.round-tab i{
     color:#555555;
 }
 .wizard li.active span.round-tab {
-        background: #0db02b;
+        background: #4e73df;
     color: #fff;
-    border-color: #0db02b;
+    border-color: #4e73df;
 }
 .wizard li.active span.round-tab i{
     color: #5bc0de;
 }
 .wizard .nav-tabs > li.active > a i{
-	color: #0db02b;
+	color: #4e73df;
 }
 
 .wizard .nav-tabs > li {
@@ -141,7 +141,7 @@ span.round-tab i{
     font-weight: 400;
     white-space: nowrap;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-30%, -50%);
     font-size: 12px;
     font-weight: 700;
     color: #000;
