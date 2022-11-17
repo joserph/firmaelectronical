@@ -37,37 +37,41 @@
                                     <h4 class="text-center">Step 1</h4>
                                     <div class="form-row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group" id="g_contenido">
                                                 {{ Form::label('contenido', 'Contenido') }}
-                                                {{ Form::text('contenido', null, ['class' => 'form-control is-valid', 'required', 'id' => 'g_contenido']) }}
+                                                {{ Form::text('contenido', null, ['class' => 'form-control', 'required', 'id' => 'i_contenido']) }}
                                                 @error('contenido')
-                                                    <div class="invalid-feedback">
-                                                        Error x
-                                                    </div>
+                                                    {{ $message }}
                                                 @enderror
+                                                <div class="invalid-feedback">
+                                                    Error x
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Phone Number  *</label> 
-                                                <input class="form-control" type="text" name="name" placeholder=""> 
+                                                {{ Form::label('telefono', 'Telefono') }}
+                                                {{ Form::text('telefono', null, ['class' => 'form-control', 'required', 'id' => 'i_telefono']) }}
+                                                @error('telefono')
+                                                    {{ $message }}
+                                                @enderror
+                                                <div class="invalid-feedback">
+                                                    Error x
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Email Address *</label> 
-                                                <input class="form-control" type="email" name="name" placeholder=""> 
+                                                {{ Form::label('email', 'Email') }}
+                                                {{ Form::email('email', null, ['class' => 'form-control', 'required', 'id' => 'i_email']) }}
+                                                @error('email')
+                                                    {{ $message }}
+                                                @enderror
+                                                <div class="invalid-feedback">
+                                                    Error x
+                                                </div>
                                             </div>
                                         </div>
-                                        
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Password *</label> 
-                                                <input class="form-control" type="password" name="name" placeholder=""> 
-                                            </div>
-                                        </div>
-                                        
-                                        
                                     </div>
                                     <ul class="list-inline pull-right">
                                         <li><button type="button" id="next-step" class="btn btn-primary">Siguiente</button></li>
@@ -76,43 +80,45 @@
                                 <div class="tab-pane" role="tabpanel" id="step2">
                                     <h4 class="text-center">Step 2</h4>
                                     <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Address 1 *</label> 
-                                            <input class="form-control" type="text" name="name" placeholder=""> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ Form::label('direccion', 'Direccion') }}
+                                                {{ Form::text('direccion', null, ['class' => 'form-control', 'id' => 'i_direccion']) }}
+                                                @error('direccion')
+                                                    {{ $message }}
+                                                @enderror
+                                                <div class="invalid-feedback">
+                                                    Error x
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>City / Town *</label> 
-                                            <input class="form-control" type="text" name="name" placeholder=""> 
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ Form::label('ciudad', 'Ciudad') }}
+                                                {{ Form::text('ciudad', null, ['class' => 'form-control', 'id' => 'i_ciudad']) }}
+                                                @error('ciudad')
+                                                    {{ $message }}
+                                                @enderror
+                                                <div class="invalid-feedback">
+                                                    Error x
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Country *</label> 
-                                            <select name="country" class="form-control" id="country">
-                                                <option value="NG" selected="selected">Nigeria</option>
-                                                <option value="NU">Niue</option>
-                                                <option value="NF">Norfolk Island</option>
-                                                <option value="KP">North Korea</option>
-                                                <option value="MP">Northern Mariana Islands</option>
-                                                <option value="NO">Norway</option>
-                                            </select>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Country *</label> 
+                                                <select name="pais" class="form-control" id="country">
+                                                    <option value="NG" selected="selected">Nigeria</option>
+                                                    <option value="NU">Niue</option>
+                                                    <option value="NF">Norfolk Island</option>
+                                                    <option value="KP">North Korea</option>
+                                                    <option value="MP">Northern Mariana Islands</option>
+                                                    <option value="NO">Norway</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Registration No.</label> 
-                                            <input class="form-control" type="text" name="name" placeholder=""> 
-                                        </div>
-                                    </div>
                                    </div>
-                                    
                                     
                                    <ul class="list-inline pull-right">
                                         <li><button type="button" id="prev-step" class="btn btn-secondary">Atras</button></li>

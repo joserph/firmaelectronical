@@ -17,8 +17,53 @@ const expresiones = {
 	telefono: /^\d{7,14}$/ // 7 a 14 numeros.
 }
 
+const inputs = {
+    contenido: false,
+    telefono: false,
+    email: false,
+    direccion: false,
+    ciudad: false,
+    pais: false
+}
+
+const inpustRequired = {
+    contenido: false,
+    telefono: false,
+    email: false,
+}
+
 const validateInputsNaturalPerson = (e) => {
-    console.log(e.target.name)
+    switch (e.target.name) {
+        case "contenido":
+            validateField(expresiones.usuario, e.target, 'contenido')
+        break
+        case "telefono":
+            validateField(expresiones.telefono, e.target, 'telefono')
+        break
+        case "email":
+            validateField(expresiones.correo, e.target, 'email')
+        break
+        case "direccion":
+            validateField(expresiones.usuario, e.target, 'direccion')
+        break
+        case "ciudad":
+            validateField(expresiones.usuario, e.target, 'ciudad')
+        break
+        case "pais":
+            validateField(expresiones.usuario, e.target, 'pais')
+        break
+    }
+}
+
+const validateField = (expretion, input, name) => {
+    if(expretion.test(input.value)){
+        document.getElementById(`i_${name}`).classList.remove('is-invalid')
+        document.getElementById(`i_${name}`).classList.add('is-valid')
+        inputs[name] = true
+    }else{
+        document.getElementById(`i_${name}`).classList.add('is-invalid')
+        inputs[name] = false
+    }
 }
 
 inputs__natural__person.forEach((input) => {
@@ -30,13 +75,30 @@ natural__person__form.addEventListener('click', (e) => {
 
 })
 
-next_step.addEventListener('click', () => {
-    li_step_1.classList.remove('active')
-    li_step_2.classList.remove('disabled')
-    li_step_2.classList.add('active')
+// next_step.click(function(){
+//     var tab_pane = $(this).closest('.tab-pane')
 
-    step1.classList.remove('active')
-    step2.classList.add('active')
+//     console.log('hola')
+// })
+
+
+next_step.addEventListener('click', () => {
+    let curStepBtn = step1.getAttribute('id')
+    let curInputs = curStepBtn.find('text')
+    console.log(curInputs)
+    if(inputs.contenido){
+        alert('El campo contenido esta lleno');
+        li_step_1.classList.remove('active')
+        li_step_2.classList.remove('disabled')
+        li_step_2.classList.add('active')
+
+        step1.classList.remove('active')
+        step2.classList.add('active')
+    }else{
+        alert('El campo contenido es requerido');
+        
+    }
+    
 })
 
 prev_step.addEventListener('click', () => {
