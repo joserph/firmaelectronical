@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('page_css')
     <link rel="stylesheet" href="{{ asset('assets/css/mystyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -11,7 +12,7 @@
         </ol>
     </nav>
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Pernosa Natural</h1>
+    <h1 class="h3 mb-2 text-gray-800">Persona Natural</h1>
     
     <!-- //////////////// -->
     <br>
@@ -35,7 +36,7 @@
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             @include('natural-person.partials.formInput')
                             <ul class="list-inline pull-right">
-                                <li><button type="button" id="next-step" class="btn btn-primary">Siguiente</button></li>
+                                <li><button type="button" id="next-step" class="btn btn-primary">Siguiente <i class="fas fa-arrow-circle-right"></i></button></li>
                             </ul>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
@@ -54,6 +55,12 @@
 </div>
 @section('page_js')
     <script src="{{ asset('assets/js/myjs.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 @endsection
 @endsection
 

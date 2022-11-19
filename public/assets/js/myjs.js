@@ -95,12 +95,11 @@ $(document).ready(function(){
         
                 step1.classList.remove('active')
                 step2.classList.add('active')
-            }else{
-                
-                    
             }
         }
     })
+
+    
 
 
     // next_step.addEventListener('click', () => {
@@ -132,6 +131,22 @@ $(document).ready(function(){
     })
 })
 
+function ruc(x){
+   
+    if(x == 1){
+        document.getElementById('b_ruc_personal').classList.remove('b-hidden');
+        document.getElementById('i_ruc_personal').setAttribute('required', 'required');
+        // Show input File
+        //document.getElementById('g_f_copiaruc').classList.remove('ocultar');
+        //document.getElementById('f_copiaruc').setAttribute('required', 'required');
+    }else{
+        document.getElementById('b_ruc_personal').classList.add('b-hidden');
+        document.getElementById('i_ruc_personal').removeAttribute('required');
+        // Hide input File
+        //document.getElementById('g_f_copiaruc').classList.add('ocultar');
+        //document.getElementById('f_copiaruc').removeAttribute('required');
+    }
+}
 
 
 
