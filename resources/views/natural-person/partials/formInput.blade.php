@@ -118,7 +118,7 @@
     <div class="col-md-3 b-hidden" id="b_ruc_personal">
         <div class="form-group " id="g_ruc_personal">
             {{ Form::label('ruc_personal', 'RUC Personal') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('ruc_personal', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("ruc_personal")', 'required', 'id' => 'i_ruc_personal', 'placeholder' => '0102698867001', 'maxlength' => '13']) }}
+            {{ Form::text('ruc_personal', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("ruc_personal")', 'id' => 'i_ruc_personal', 'placeholder' => '0102698867001', 'maxlength' => '13']) }}
             @error('ruc_personal')
                 {{ $message }}
             @enderror
@@ -244,7 +244,7 @@
                 'Zamora Chinchipe' => 'Zamora Chinchipe',
                 'Galápagos' => 'Galápagos',
                 'Antártida Ecuatoriana' => 'Antártida Ecuatoriana'],
-                null, ['class' => 'custom-select custom-select-sm js-example-basic-single', 'required', 'id' => 'i_provincia', 'placeholder' => 'Seleccione Provincia']) }}
+                null, ['class' => 'custom-select custom-select-sm', 'required', 'id' => 'i_provincia', 'placeholder' => 'Seleccione Provincia']) }}
             @error('provincia')
                 {{ $message }}
             @enderror

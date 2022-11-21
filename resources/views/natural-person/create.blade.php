@@ -55,14 +55,6 @@
 </div>
 @section('page_js')
     <script src="{{ asset('assets/js/myjs.js') }}"></script>
-    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2({
-                theme: 'bootstrap'
-            });
-        });
-    </script>
 @endsection
 @endsection
 

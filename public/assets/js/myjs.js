@@ -118,10 +118,12 @@ $(document).ready(function(){
             document.getElementById(`i_${name}`).classList.remove('is-invalid')
             document.getElementById(`i_${name}`).classList.add('is-valid')
             document.getElementById(`error_${name}`).style.display = 'none'
+            inputs[name] = true
         }else{
             document.getElementById(`i_${name}`).classList.add('is-invalid')
             document.getElementById(`i_${name}`).classList.remove('is-valid')
             document.getElementById(`error_${name}`).style.display = 'block'
+            inputs[name] = false
         }
     }
 
@@ -136,7 +138,7 @@ $(document).ready(function(){
         let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")
         let curSlects = curStep.find("select")
         let isValid = true;
-        console.log(curSlects)
+        //console.log(curSlects)
         for(var i=0; i<curInputs.length; i++){
             if (!curInputs[i].validity.valid){
                 isValid = false;
@@ -151,41 +153,37 @@ $(document).ready(function(){
             }
         }
         /* Validamos los campos requeridos */
+        
         if(isValid){
             /* Validamos si los campos esta correctos */
-            if(inputs.contenido){
-                
+            if(inputs.contenedor && 
+                inputs.nombres && 
+                inputs.apellido1 && 
+                inputs.apellido2 && 
+                inputs.tipodocumento && 
+                inputs.coddactilar && 
+                inputs.sexo && 
+                inputs.nacionalidad && 
+                inputs.telfCelular && 
+                inputs.telfCelular2 && 
+                inputs.eMail && 
+                inputs.eMail2 && 
+                inputs.provincia && 
+                inputs.ciudad && 
+                inputs.direccion && 
+                inputs.vigenciafirma){
+                    
                 li_step_1.classList.remove('active')
                 li_step_2.classList.remove('disabled')
                 li_step_2.classList.add('active')
         
                 step1.classList.remove('active')
                 step2.classList.add('active')
+            }else{
+                
             }
         }
     })
-
-    
-
-
-    // next_step.addEventListener('click', () => {
-    //     var curStep = $(this).closest(".tab-pane")
-    //     //let curInputs = curStepBtn.find('text')
-    //     console.log(curStep)
-    //     if(inputs.contenido){
-    //         alert('El campo contenido esta lleno');
-    //         li_step_1.classList.remove('active')
-    //         li_step_2.classList.remove('disabled')
-    //         li_step_2.classList.add('active')
-
-    //         step1.classList.remove('active')
-    //         step2.classList.add('active')
-    //     }else{
-    //         alert('El campo contenido es requerido');
-            
-    //     }
-        
-    // })
 
     prev_step.addEventListener('click', () => {
         li_step_2.classList.remove('active')

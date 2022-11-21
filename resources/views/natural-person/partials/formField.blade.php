@@ -1,9 +1,9 @@
 <div class="form-row">
     <div class="col-md-6">
         <div class="form-group">
-            {{ Form::label('direccion', 'Direccion') }}
-            {{ Form::text('direccion', null, ['class' => 'form-control', 'id' => 'i_direccion']) }}
-            @error('direccion')
+            {{ Form::label('f_cedulaFront', 'f_cedulaFront') }}
+            {{ Form::file('f_cedulaFront', null, ['class' => 'form-control', 'required', 'onchange' => 'validateInputFileImg("f_cedulaFront")', 'accept' => '.jpg,.jpeg', 'id' => 'f_cedulaFront']) }}
+            @error('f_cedulaFront')
                 {{ $message }}
             @enderror
             <div class="invalid-feedback">
@@ -11,7 +11,9 @@
             </div>
         </div>
     </div>
-    
+    <div class="col-md-6">
+        <div id="visor_f_cedulaFront"></div>
+    </div>
     <div class="col-md-6">
         <div class="form-group">
             {{ Form::label('ciudad', 'Ciudad') }}
