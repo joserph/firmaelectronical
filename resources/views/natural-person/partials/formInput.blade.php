@@ -11,7 +11,7 @@
                 '0' => 'ARCHIVO .P12', 
                 '1' => 'TOKEN', 
                 '2' => 'NUBE'], 
-                null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Certificado']) }}
+                null, ['class' => 'custom-select custom-select-sm', 'id' => 'i_contenedor', 'required', 'placeholder' => 'Seleccione Certificado']) }}
             @error('contenedor')
                 {{ $message }}
             @enderror
@@ -28,7 +28,7 @@
                 {{ $message }}
             @enderror
             <div class="invalid-feedback2" id="error_nombres">
-                El campo es obligatorio y no acepta números ni caracteres especiales
+                El campo es requerido y No acepta números ni caracteres especiales
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                 {{ $message }}
             @enderror
             <div class="invalid-feedback2" id="error_apellido1">
-                El campo es obligatorio y no acepta números ni caracteres especiales
+                El campo es requerido y No acepta números ni caracteres especiales
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
             {{ Form::select('tipodocumento', [
                 'CEDULA' => 'CEDULA', 
                 'PASAPORTE' => 'PASAPORTE'],
-                null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Tipo Documento']) }}
+                null, ['class' => 'custom-select custom-select-sm', 'required', 'id' => 'i_tipodocumento', 'placeholder' => 'Seleccione Tipo Documento']) }}
             @error('tipodocumento')
                 {{ $message }}
             @enderror
@@ -74,7 +74,7 @@
     <div class="col-md-4">
         <div class="form-group" id="g_numerodocumento">
             {{ Form::label('numerodocumento', 'Número de Documento') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('numerodocumento', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_numerodocumento', 'placeholder' => '0102698867']) }}
+            {{ Form::text('numerodocumento', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("numerodocumento")', 'required', 'id' => 'i_numerodocumento', 'placeholder' => '0102698867']) }}
             @error('numerodocumento')
                 {{ $message }}
             @enderror
@@ -118,7 +118,7 @@
     <div class="col-md-3 b-hidden" id="b_ruc_personal">
         <div class="form-group " id="g_ruc_personal">
             {{ Form::label('ruc_personal', 'RUC Personal') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('ruc_personal', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_ruc_personal', 'placeholder' => '0102698867001', 'maxlength' => '13']) }}
+            {{ Form::text('ruc_personal', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("ruc_personal")', 'required', 'id' => 'i_ruc_personal', 'placeholder' => '0102698867001', 'maxlength' => '13']) }}
             @error('ruc_personal')
                 {{ $message }}
             @enderror
@@ -133,7 +133,7 @@
             {{ Form::select('sexo', [
                 'HOMBRE' => 'HOMBRE', 
                 'MUJER' => 'MUJER'],
-                null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Sexo']) }}
+                null, ['class' => 'custom-select custom-select-sm', 'required', 'id' => 'i_sexo', 'placeholder' => 'Seleccione Sexo']) }}
             @error('sexo')
                 {{ $message }}
             @enderror
@@ -145,7 +145,7 @@
     <div class="col-md-3">
         <div class="form-group" id="g_fecha_nacimiento">
             {{ Form::label('fecha_nacimiento', 'Fecha de Nacimiento') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::date('fecha_nacimiento', null, ['class' => 'form-control form-control-sm', 'autocomplete' => 'off']) }}
+            {{ Form::date('fecha_nacimiento', null, ['class' => 'form-control form-control-sm', 'required', 'autocomplete' => 'off']) }}
             @error('fecha_nacimiento')
                 {{ $message }}
             @enderror
@@ -244,7 +244,7 @@
                 'Zamora Chinchipe' => 'Zamora Chinchipe',
                 'Galápagos' => 'Galápagos',
                 'Antártida Ecuatoriana' => 'Antártida Ecuatoriana'],
-                null, ['class' => 'form-control form-control-sm js-example-basic-single', 'placeholder' => 'Seleccione Provincia']) }}
+                null, ['class' => 'custom-select custom-select-sm js-example-basic-single', 'required', 'id' => 'i_provincia', 'placeholder' => 'Seleccione Provincia']) }}
             @error('provincia')
                 {{ $message }}
             @enderror
@@ -287,7 +287,7 @@
                 '4 años' => '4 años',
                 '5 años' => '5 años', 
                 '7 días' => '7 días'],
-                null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Seleccione Vigencia']) }}
+                null, ['class' => 'custom-select custom-select-sm', 'required', 'id' => 'i_vigenciafirma', 'placeholder' => 'Seleccione Vigencia']) }}
             @error('vigenciafirma')
                 {{ $message }}
             @enderror

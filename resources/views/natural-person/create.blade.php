@@ -58,7 +58,9 @@
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
+            $('.js-example-basic-single').select2({
+                theme: 'bootstrap'
+            });
         });
     </script>
 @endsection

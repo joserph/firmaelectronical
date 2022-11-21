@@ -69,11 +69,11 @@
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('assets/js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/Chart.min.js') }}"></script> --}}
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('assets/js/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('assets/js/chart-pie-demo.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/chart-pie-demo.js') }}"></script> --}}
     @yield('page_js')
     @yield('js')
 </body>
