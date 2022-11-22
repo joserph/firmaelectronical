@@ -133,56 +133,63 @@ $(document).ready(function(){
     })
 
     next_step.click(function(){
-        let curStep = $(this).closest('.tab-pane')
-        let curStepBtn = curStep.attr('id')
-        let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")
-        let curSlects = curStep.find("select")
-        let isValid = true;
-        //console.log(curSlects)
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-control").addClass("is-invalid");
-            }
-        }
+        li_step_1.classList.remove('active')
+        li_step_2.classList.remove('disabled')
+        li_step_2.classList.add('active')
 
-        for(var i=0; i<curSlects.length; i++){
-            if (!curSlects[i].validity.valid){
-                isValid = false;
-                $(curSlects[i]).closest(".custom-select").addClass("is-invalid");
-            }
-        }
-        /* Validamos los campos requeridos */
+        step1.classList.remove('active')
+        step2.classList.add('active')
+
+        // let curStep = $(this).closest('.tab-pane')
+        // let curStepBtn = curStep.attr('id')
+        // let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")
+        // let curSlects = curStep.find("select")
+        // let isValid = true;
+        // //console.log(curSlects)
+        // for(var i=0; i<curInputs.length; i++){
+        //     if (!curInputs[i].validity.valid){
+        //         isValid = false;
+        //         $(curInputs[i]).closest(".form-control").addClass("is-invalid");
+        //     }
+        // }
+
+        // for(var i=0; i<curSlects.length; i++){
+        //     if (!curSlects[i].validity.valid){
+        //         isValid = false;
+        //         $(curSlects[i]).closest(".custom-select").addClass("is-invalid");
+        //     }
+        // }
+        // /* Validamos los campos requeridos */
         
-        if(isValid){
-            /* Validamos si los campos esta correctos */
-            if(inputs.contenedor && 
-                inputs.nombres && 
-                inputs.apellido1 && 
-                inputs.apellido2 && 
-                inputs.tipodocumento && 
-                inputs.coddactilar && 
-                inputs.sexo && 
-                inputs.nacionalidad && 
-                inputs.telfCelular && 
-                inputs.telfCelular2 && 
-                inputs.eMail && 
-                inputs.eMail2 && 
-                inputs.provincia && 
-                inputs.ciudad && 
-                inputs.direccion && 
-                inputs.vigenciafirma){
+        // if(isValid){
+        //     /* Validamos si los campos esta correctos */
+        //     if(inputs.contenedor && 
+        //         inputs.nombres && 
+        //         inputs.apellido1 && 
+        //         inputs.apellido2 && 
+        //         inputs.tipodocumento && 
+        //         inputs.coddactilar && 
+        //         inputs.sexo && 
+        //         inputs.nacionalidad && 
+        //         inputs.telfCelular && 
+        //         inputs.telfCelular2 && 
+        //         inputs.eMail && 
+        //         inputs.eMail2 && 
+        //         inputs.provincia && 
+        //         inputs.ciudad && 
+        //         inputs.direccion && 
+        //         inputs.vigenciafirma){
                     
-                li_step_1.classList.remove('active')
-                li_step_2.classList.remove('disabled')
-                li_step_2.classList.add('active')
+        //         li_step_1.classList.remove('active')
+        //         li_step_2.classList.remove('disabled')
+        //         li_step_2.classList.add('active')
         
-                step1.classList.remove('active')
-                step2.classList.add('active')
-            }else{
+        //         step1.classList.remove('active')
+        //         step2.classList.add('active')
+        //     }else{
                 
-            }
-        }
+        //     }
+        // }
     })
 
     prev_step.addEventListener('click', () => {
@@ -375,6 +382,31 @@ function validarDocumento(doc){
     document.getElementById(`i_${doc}`).classList.remove('is-invalid');
     document.getElementById(`i_${doc}`).classList.add('is-valid');
     return true;  
+}
+
+// VALIDATE INPUTS FILES
+function validateInputFileImg(fileName)
+{
+   let filePhoto = document.getElementById(`${fileName}`);
+   let fileRoute = filePhoto.value;
+   let validExpression = /(.JPG|.jpg|.jpeg|.JPEG)$/i;
+   if(!validExpression.exec(fileRoute)){
+      alert('Asegurese de haber seleccionado un JPG');
+      filePhoto.value = '';
+      return false;
+   }else{
+      if (filePhoto.files && filePhoto.files[0]) 
+      {
+            let visor = new FileReader();
+            visor.onload = function(e) 
+            {
+               document.getElementById(`visor_${fileName}`).innerHTML = 
+               '<embed src="'+e.target.result+'" width="350" />';
+            };
+            visor.readAsDataURL(filePhoto.files[0]);
+            document.getElementById(`img_${fileName}`).style.display = 'none';
+      }
+   }
 }
 
 

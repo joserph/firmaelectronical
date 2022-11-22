@@ -9,6 +9,7 @@ use Illuminate\Http\File as HttpFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class TestController extends Controller
 {
@@ -47,14 +48,20 @@ class TestController extends Controller
         //dd($archivo);
         $name = 'test_' . time() . '.' . $archivo->guessExtension();
 
-        $file = Storage::disk("google")->putFileAs("", $archivo, $name);
+        $img = Image::make($archivo);
+
+        $img->resize(333, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $fileSave = Storage::disk("google")->putFileAs("", $img, $name);
 
         // Extraemos el path del archivo
         $files = Storage::disk("google")->allFiles();
         foreach($files as $f)
         {
             $detail = Storage::disk("google")->getMetadata($f);
-            if($file == $detail['name'])
+            if($fileSave == $detail['name'])
             {
                 $detail2 = Storage::disk("google")->getMetadata($f);
             }
