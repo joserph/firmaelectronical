@@ -45,23 +45,46 @@ class TestController extends Controller
     public function store(Request $request)
     {
         $archivo = $request->file('archivo');
-        //dd($archivo);
+        
         $name = 'test_' . time() . '.' . $archivo->guessExtension();
+        //$url = storage_path() . '\app\public\img/' . $name;
+        $url = storage_path('\app\public\img/' . $name);
 
-        $img = Image::make($archivo);
-
+        $img =  Image::make($archivo);
+        
         $img->resize(333, null, function ($constraint) {
             $constraint->aspectRatio();
         });
+        $img->save($url);
+        //Storage::disk('public')->get('users/8/helloworld.jpg');
+        $contents = Storage::disk('public')->get('img/' . $name);
+        $test = new File($contents);
+        dd($test);
+        
+        //$saved_image_uri = $img->dirname.'/'.$img->basename;
 
-        $fileSave = Storage::disk("google")->putFileAs("", $img, $name);
+        //$uploaded_thumbnail_image = Storage::putFileAs('public/thumbnails/'.$portfolio_returned->id, new File($saved_image_uri), $thumbnail_image_name);
+        
+        // Image::make($request->file('archivo'))
+        //     ->resize(333, null, function ($constraint) {
+        //         $constraint->aspectRatio();
+        //     })->save($url);
+        
+        // Nombre del archivo que es igual $name
+        //$thumbnail_image_name = pathinfo($archivo->getClientOriginalName(), PATHINFO_FILENAME).'.'.$archivo->getClientOriginalExtension();
 
+        //dd($saved_image_uri);
+        /*$archivo = $request->file('archivo');
+        //dd($archivo);
+        $name = 'test_' . time() . '.' . $archivo->guessExtension();
+
+        $file = Storage::disk("google")->putFileAs("", $archivo, $name);
         // Extraemos el path del archivo
         $files = Storage::disk("google")->allFiles();
         foreach($files as $f)
         {
             $detail = Storage::disk("google")->getMetadata($f);
-            if($fileSave == $detail['name'])
+            if($file == $detail['name'])
             {
                 $detail2 = Storage::disk("google")->getMetadata($f);
             }
@@ -73,8 +96,8 @@ class TestController extends Controller
             'archivo' => $name,
             'path' => $detail2['path']
         ]);
+        return redirect()->route('tests.index');*/
 
-        return redirect()->route('tests.index');
     }
 
     /**
