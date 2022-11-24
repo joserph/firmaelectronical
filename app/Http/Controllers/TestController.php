@@ -10,9 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\UploadedFile;
 
 class TestController extends Controller
 {
+    private $diskPublic = 'public';
     /**
      * Display a listing of the resource.
      *
@@ -47,8 +50,8 @@ class TestController extends Controller
         $archivo = $request->file('archivo');
         
         $name = 'test_' . time() . '.' . $archivo->guessExtension();
-        //$url = storage_path() . '\app\public\img/' . $name;
-        $url = storage_path('\app\public\img/' . $name);
+        
+        $url = storage_path('app\public\img/' . $name);
 
         $img =  Image::make($archivo);
         
@@ -56,10 +59,19 @@ class TestController extends Controller
             $constraint->aspectRatio();
         });
         $img->save($url);
-        //Storage::disk('public')->get('users/8/helloworld.jpg');
+        
         $contents = Storage::disk('public')->get('img/' . $name);
-        $test = new File($contents);
-        dd($test);
+        // $test = new UploadedFile($img);
+        // dd($test);
+        $test = $this->pathToUploadedFile($url, true);
+        dump($archivo);
+        dump($test);
+        exit();
+        $file = Storage::disk("google")->putFileAs("", $img, $name);
+
+        //$test = file($url);
+        //$test = new File($contents);
+        
         
         //$saved_image_uri = $img->dirname.'/'.$img->basename;
 
@@ -98,6 +110,18 @@ class TestController extends Controller
         ]);
         return redirect()->route('tests.index');*/
 
+    }
+
+    public function pathToUploadedFile( $path, $test = true ) {
+        $filesystem = new Filesystem;
+        
+        $name = $filesystem->name( $path );
+        $extension = $filesystem->extension( $path );
+        $originalName = $name . '.' . $extension;
+        $mimeType = $filesystem->mimeType( $path );
+        $error = null;
+    
+        return new UploadedFile( $path, $originalName, $mimeType, $error, $test );
     }
 
     /**
