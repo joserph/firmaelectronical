@@ -61,14 +61,11 @@ class TestController extends Controller
         $img->save($url);
         
         $contents = Storage::disk('public')->get('img/' . $name);
-        // $test = new UploadedFile($img);
-        // dd($test);
+        
         $test = $this->pathToUploadedFile($url, true);
-        dump($archivo);
-        dump($test);
-        exit();
-        $file = Storage::disk("google")->putFileAs("", $img, $name);
-
+        
+        $file = Storage::disk("google")->putFileAs("", $test, $name);
+        //dd($file);
         //$test = file($url);
         //$test = new File($contents);
         
@@ -107,8 +104,8 @@ class TestController extends Controller
             'contenido' => $request->contenido,
             'archivo' => $name,
             'path' => $detail2['path']
-        ]);
-        return redirect()->route('tests.index');*/
+        ]);*/
+        return redirect()->route('tests.index');
 
     }
 
