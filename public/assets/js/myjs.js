@@ -2,6 +2,8 @@ $(document).ready(function(){
     const natural__person__form = document.getElementById('natural__person__form')
     const inputs__natural__person = document.querySelectorAll('#natural__person__form input')
     const selects_natural_person = document.querySelectorAll('#natural__person__form select')
+    const files_natural_person = document.querySelectorAll('#natural__person__form file')
+    
     //const next_step = document.getElementById('next-step')
     let next_step = $('#next-step');
     let step1 = document.getElementById('step1')
@@ -40,6 +42,7 @@ $(document).ready(function(){
         ciudad: false,
         direccion: false,
         vigenciafirma: false,
+        f_cedulaFront: false,
     }
 
     const validateInputsNaturalPerson = (e) => {
@@ -91,6 +94,9 @@ $(document).ready(function(){
             break
             case "vigenciafirma":
                 validateSelect(e.target, 'vigenciafirma')
+            break
+            case "f_cedulaFront":
+                validateFile(e.target, 'f_cedulaFront')
             break
         }
     }
@@ -208,14 +214,14 @@ function ruc(x){
         document.getElementById('b_ruc_personal').classList.remove('b-hidden');
         document.getElementById('i_ruc_personal').setAttribute('required', 'required');
         // Show input File
-        //document.getElementById('g_f_copiaruc').classList.remove('ocultar');
-        //document.getElementById('f_copiaruc').setAttribute('required', 'required');
+        document.getElementById('g_f_copiaruc').classList.remove('b-hidden');
+        document.getElementById('f_copiaruc').setAttribute('required', 'required');
     }else{
         document.getElementById('b_ruc_personal').classList.add('b-hidden');
         document.getElementById('i_ruc_personal').removeAttribute('required');
         // Hide input File
-        //document.getElementById('g_f_copiaruc').classList.add('ocultar');
-        //document.getElementById('f_copiaruc').removeAttribute('required');
+        document.getElementById('g_f_copiaruc').classList.add('b-hidden');
+        document.getElementById('f_copiaruc').removeAttribute('required');
     }
 }
 
@@ -387,28 +393,61 @@ function validarDocumento(doc){
 // VALIDATE INPUTS FILES
 function validateInputFileImg(fileName)
 {
-   let filePhoto = document.getElementById(`${fileName}`);
-   let fileRoute = filePhoto.value;
-   let validExpression = /(.JPG|.jpg|.jpeg|.JPEG)$/i;
-   if(!validExpression.exec(fileRoute)){
-      alert('Asegurese de haber seleccionado un JPG');
-      filePhoto.value = '';
-      return false;
-   }else{
-      if (filePhoto.files && filePhoto.files[0]) 
-      {
+    let filePhoto = document.getElementById(`${fileName}`);
+    let fileRoute = filePhoto.value;
+    let validExpression = /(.JPG|.jpg|.jpeg|.JPEG)$/i;
+    if(!validExpression.exec(fileRoute)){
+        //alert('Asegurese de haber seleccionado un JPG');
+        filePhoto.value = '';
+        return false;
+    }else{
+        if (filePhoto.files && filePhoto.files[0]) 
+        {
             let visor = new FileReader();
             visor.onload = function(e) 
             {
-               document.getElementById(`visor_${fileName}`).innerHTML = 
-               '<embed src="'+e.target.result+'" width="350" />';
+            document.getElementById(`visor_${fileName}`).innerHTML = 
+            '<embed src="'+e.target.result+'" width="350" />';
             };
             visor.readAsDataURL(filePhoto.files[0]);
-            document.getElementById(`img_${fileName}`).style.display = 'none';
-      }
-   }
+            //document.getElementById(`img_${fileName}`).style.display = 'none';
+        }
+    }
 }
 
+function factElec(x){
+    if(x == 0){
+        document.getElementById('g_ruc_cedula_factura').classList.remove('b-hidden');
+        document.getElementById('i_ruc_cedula_factura').setAttribute('required', 'required');
+    
+        document.getElementById('g_nombres_factura').classList.remove('b-hidden');
+        document.getElementById('i_nombres_factura').setAttribute('required', 'required');
+    
+        document.getElementById('g_correo_factura').classList.remove('b-hidden');
+        document.getElementById('i_correo_factura').setAttribute('required', 'required');
+    
+        document.getElementById('g_direccion_factura').classList.remove('b-hidden');
+        document.getElementById('i_direccion_factura').setAttribute('required', 'required');
+    
+        document.getElementById('g_telefono_factura').classList.remove('b-hidden');
+        document.getElementById('i_telefono_factura').setAttribute('required', 'required');
+    }else{
+        document.getElementById('g_ruc_cedula_factura').classList.add('b-hidden');
+        document.getElementById('i_ruc_cedula_factura').removeAttribute('required');
+    
+        document.getElementById('g_nombres_factura').classList.add('b-hidden');
+        document.getElementById('i_nombres_factura').removeAttribute('required');
+    
+        document.getElementById('g_correo_factura').classList.add('b-hidden');
+        document.getElementById('i_correo_factura').removeAttribute('required');
+    
+        document.getElementById('g_direccion_factura').classList.add('b-hidden');
+        document.getElementById('i_direccion_factura').removeAttribute('required');
+    
+        document.getElementById('g_telefono_factura').classList.add('b-hidden');
+        document.getElementById('i_telefono_factura').removeAttribute('required');
+    }
+}
 
 // ------------step-wizard-------------
 // $(document).ready(function () {
