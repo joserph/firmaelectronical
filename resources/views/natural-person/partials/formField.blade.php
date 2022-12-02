@@ -75,7 +75,7 @@
                     <div class="col-md-12">
                         {{ Form::label('f_adicional1', 'Documento Opcional Autorización Partner (Formato .pdf)') }}
                         <div class="custom-file">
-                            <input type="file" name="f_adicional1" class="custom-file-input" accept=".pdf" id="f_adicional1" onchange="validateInputFileImg('f_adicional1')">
+                            <input type="file" name="f_adicional1" class="custom-file-input" accept=".pdf" id="f_adicional1" onchange="validateInputFilePdf('f_adicional1')">
                             <label class="custom-file-label" for="f_adicional1" data-browse="Elegir">Seleccionar PDF</label>
                           </div>
                         @error('f_adicional1')
@@ -97,7 +97,7 @@
                     <div class="col-md-12">
                         {{ Form::label('f_copiaruc', 'Copia RUC (Formato .pdf)') }} <i class="fab fa-diaspora text-warning"></i>
                         <div class="custom-file">
-                            <input type="file" name="f_copiaruc" class="custom-file-input" accept=".pdf" id="f_copiaruc" onchange="validateInputFileImg('f_copiaruc')">
+                            <input type="file" name="f_copiaruc" class="custom-file-input" accept=".pdf" id="f_copiaruc" onchange="validateInputFilePdf('f_copiaruc')">
                             <label class="custom-file-label" for="f_copiaruc" data-browse="Elegir">Seleccionar PDF</label>
                           </div>
                         @error('f_copiaruc')
@@ -143,7 +143,7 @@
     <div class="col-md-3">
         <div class="form-group b-hidden" id="g_ruc_cedula_factura">
             {{ Form::label('ruc_cedula_factura', 'RUC / Cédula') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('ruc_cedula_factura', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("ruc_cedula_factura")', 'required', 'id' => 'i_ruc_cedula_factura', 'placeholder' => '0102698867']) }}
+            {{ Form::text('ruc_cedula_factura', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("ruc_cedula_factura")', 'id' => 'i_ruc_cedula_factura', 'placeholder' => '0102698867']) }}
             @error('ruc_cedula_factura')
                 {{ $message }}
             @enderror
@@ -155,7 +155,7 @@
     <div class="col-md-4">
         <div class="form-group b-hidden" id="g_nombres_factura">
             {{ Form::label('nombres_factura', 'Nombres Completos') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('nombres_factura', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_nombres_factura', 'placeholder' => 'Calos Andres', 'autocomplete' => 'off']) }}
+            {{ Form::text('nombres_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_nombres_factura', 'placeholder' => 'Calos Andres', 'autocomplete' => 'off']) }}
             @error('nombres_factura')
                 {{ $message }}
             @enderror
@@ -164,10 +164,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-5">
         <div class="form-group b-hidden" id="g_correo_factura">
             {{ Form::label('correo_factura', 'Correo (si desea puede modificarse)') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::email('correo_factura', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_correo_factura', 'placeholder' => 'correo@correo.com']) }}
+            {{ Form::email('correo_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_correo_factura', 'placeholder' => 'correo@correo.com']) }}
             @error('correo_factura')
                 {{ $message }}
             @enderror
@@ -179,7 +179,7 @@
     <div class="col-md-7">
         <div class="form-group b-hidden" id="g_direccion_factura">
             {{ Form::label('direccion_factura', 'Dirección') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('direccion_factura', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_direccion_factura', 'placeholder' => 'Av. 10 DE AGOSTO N45-12 Y SELVA ALEGRE']) }}
+            {{ Form::text('direccion_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_direccion_factura', 'placeholder' => 'Av. 10 DE AGOSTO N45-12 Y SELVA ALEGRE']) }}
             @error('direccion_factura')
                 {{ $message }}
             @enderror
@@ -191,11 +191,23 @@
     <div class="col-md-3">
         <div class="form-group b-hidden" id="g_telefono_factura">
             {{ Form::label('telefono_factura', 'Teléfono Fíjo') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('telefono_factura', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_telefono_factura', 'placeholder' => '0912345678']) }}
+            {{ Form::text('telefono_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_telefono_factura', 'placeholder' => '0912345678']) }}
             @error('telefono_factura')
                 {{ $message }}
             @enderror
             <div class="invalid-feedback2" id="error_telefono_factura">
+                No acepta letras ni caracteres especiales
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="form-group b-hidden" id="g_comentarios_factura">
+            {{ Form::label('comentarios_factura', 'Comentarios') }}
+            {{ Form::textarea('comentarios_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_comentarios_factura', 'placeholder' => '0912345678']) }}
+            @error('comentarios_factura')
+                {{ $message }}
+            @enderror
+            <div class="invalid-feedback2" id="error_comentarios_factura">
                 No acepta letras ni caracteres especiales
             </div>
         </div>
@@ -238,7 +250,7 @@
     <div class="col-md-12">
         <hr>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div class="form-group" id="g_sexo">
             {{ Form::label('express', 'Servicio flash Costo $20 mas iva adicionales (Entrega 15 Minutos)') }} <i class="fab fa-diaspora text-warning"></i>
             {{ Form::select('express', [
@@ -249,11 +261,11 @@
                 {{ $message }}
             @enderror
             <div class="invalid-feedback2" id="error_express">
-                Debe seleccionar Servicio
+                Debe seleccionar Tipo de Servicio
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div class="form-group" id="g_nombre_partner">
             {{ Form::label('nombre_partner', 'Campo opcional Nombre y Apellido del Partner') }}
             {{ Form::text('nombre_partner', null, ['class' => 'form-control form-control-sm', 'id' => 'i_nombre_partner', 'placeholder' => 'Calos Andres', 'autocomplete' => 'off']) }}
@@ -261,7 +273,7 @@
                 {{ $message }}
             @enderror
             <div class="invalid-feedback2" id="error_nombre_partner">
-                El campo es requerido y No acepta números ni caracteres especiales
+                No acepta números ni caracteres especiales
             </div>
         </div>
     </div>

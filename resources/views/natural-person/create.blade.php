@@ -31,7 +31,7 @@
                     </ul>
                 </div>
 
-                {{ Form::open(['route' => 'blogs.store', 'method' => 'POST', 'id' => 'natural__person__form']) }}
+                {{ Form::open(['route' => 'natural-person.store', 'method' => 'POST', 'id' => 'natural__person__form']) }}
                     <div class="tab-content" id="main_form">
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             @include('natural-person.partials.formInput')
@@ -42,11 +42,10 @@
                         <div class="tab-pane" role="tabpanel" id="step2">
                             @include('natural-person.partials.formField')
                             <ul class="list-inline pull-right">
-                                <li><button type="button" id="prev-step" class="btn btn-secondary">Atras</button></li>
-                                <li><button type="submit" class="btn btn-success">Guardar</button></li>
+                                <li><button type="button" id="prev-step" class="btn btn-secondary"><i class="fas fa-arrow-circle-left"></i> Atras</button></li>
+                                {{ Form::button('Guardar <i class="far fa-save"></i>', ['type' => 'submit', 'class' => 'btn btn-success']) }}
                             </ul>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
                 {{ Form::close() }}
             </div>

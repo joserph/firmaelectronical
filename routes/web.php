@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('blogs', BlogController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('tests', TestController::class);
-    Route::resource('natural-person', NatutalPersonController::class)->except(['create', 'store']);
+    Route::resource('natural-person', NatutalPersonController::class)->except(['create']);
     
 });
 

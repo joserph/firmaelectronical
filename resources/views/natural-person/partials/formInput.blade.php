@@ -1,5 +1,8 @@
 <div class="form-row">
     {{ Form::hidden('tipo_solicitud', 1) }}
+    {{ Form::hidden('fecha_ingreso', date("Y-m-d H:i:s")) }}
+    {{ Form::hidden('fecha_envio', date("Y-m-d H:i:s")) }}
+    {{ Form::hidden('estatus_pago', null) }}
     <div class="col-md-12 text-warning">
     (<i class="fab fa-diaspora text-warning"></i>) <em>Campo Obligatorio</em> 
     </div>

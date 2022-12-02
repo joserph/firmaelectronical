@@ -21,7 +21,7 @@ $(document).ready(function(){
         password: /^.{4,12}$/, // 4 a 12 digitos.
         correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
         telefono: /^\d{7,10}$/, // 7 a 14 numeros.
-        codigodactilar: /^[a-zA-Z0-9\_\-]{9,11}$/,
+        codigodactilar: /^[a-zA-Z0-9\_\-]{9,10}$/,
         direccion: /^[a-zA-ZÀ-ÿ-z0-9'\.\-\s\,]+$/,
     }
 
@@ -42,7 +42,7 @@ $(document).ready(function(){
         ciudad: false,
         direccion: false,
         vigenciafirma: false,
-        f_cedulaFront: false,
+        express: false,
     }
 
     const validateInputsNaturalPerson = (e) => {
@@ -95,9 +95,24 @@ $(document).ready(function(){
             case "vigenciafirma":
                 validateSelect(e.target, 'vigenciafirma')
             break
-            case "f_cedulaFront":
-                validateFile(e.target, 'f_cedulaFront')
+            case "express":
+                validateSelect(e.target, 'express')
             break
+            case "nombre_partner":
+                validateField(expresiones.nombre, e.target, 'nombre_partner')
+            break
+            // case "nombres_factura":
+            //     validateField(expresiones.nombre, e.target, 'nombres_factura')
+            // break
+            // case "correo_factura":
+            //     validateField(expresiones.correo, e.target, 'correo_factura')
+            // break
+            // case "direccion_factura":
+            //     validateField(expresiones.direccion, e.target, 'direccion_factura')
+            // break
+            // case "telefono_factura":
+            //     validateField(expresiones.telefono, e.target, 'telefono_factura')
+            // break
         }
     }
 
@@ -139,63 +154,57 @@ $(document).ready(function(){
     })
 
     next_step.click(function(){
-        li_step_1.classList.remove('active')
-        li_step_2.classList.remove('disabled')
-        li_step_2.classList.add('active')
+        let curStep = $(this).closest('.tab-pane')
+        let curStepBtn = curStep.attr('id')
+        let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")
+        let curSlects = curStep.find("select")
+        let isValid = true;
+        //console.log(curSlects)
+        for(var i=0; i<curInputs.length; i++){
+            if (!curInputs[i].validity.valid){
+                isValid = false;
+                $(curInputs[i]).closest(".form-control").addClass("is-invalid");
+            }
+        }
 
-        step1.classList.remove('active')
-        step2.classList.add('active')
-
-        // let curStep = $(this).closest('.tab-pane')
-        // let curStepBtn = curStep.attr('id')
-        // let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")
-        // let curSlects = curStep.find("select")
-        // let isValid = true;
-        // //console.log(curSlects)
-        // for(var i=0; i<curInputs.length; i++){
-        //     if (!curInputs[i].validity.valid){
-        //         isValid = false;
-        //         $(curInputs[i]).closest(".form-control").addClass("is-invalid");
-        //     }
-        // }
-
-        // for(var i=0; i<curSlects.length; i++){
-        //     if (!curSlects[i].validity.valid){
-        //         isValid = false;
-        //         $(curSlects[i]).closest(".custom-select").addClass("is-invalid");
-        //     }
-        // }
-        // /* Validamos los campos requeridos */
-        
-        // if(isValid){
-        //     /* Validamos si los campos esta correctos */
-        //     if(inputs.contenedor && 
-        //         inputs.nombres && 
-        //         inputs.apellido1 && 
-        //         inputs.apellido2 && 
-        //         inputs.tipodocumento && 
-        //         inputs.coddactilar && 
-        //         inputs.sexo && 
-        //         inputs.nacionalidad && 
-        //         inputs.telfCelular && 
-        //         inputs.telfCelular2 && 
-        //         inputs.eMail && 
-        //         inputs.eMail2 && 
-        //         inputs.provincia && 
-        //         inputs.ciudad && 
-        //         inputs.direccion && 
-        //         inputs.vigenciafirma){
+        for(var i=0; i<curSlects.length; i++){
+            if (!curSlects[i].validity.valid){
+                isValid = false;
+                $(curSlects[i]).closest(".custom-select").addClass("is-invalid");
+            }
+        }
+        /* Validamos los campos requeridos */
+        //console.log('Click')
+        if(isValid){
+            console.log('Click')
+            /* Validamos si los campos esta correctos */
+            if(inputs.contenedor && 
+                inputs.nombres && 
+                inputs.apellido1 && 
+                inputs.apellido2 && 
+                inputs.tipodocumento && 
+                inputs.coddactilar && 
+                inputs.sexo && 
+                inputs.nacionalidad && 
+                inputs.telfCelular && 
+                inputs.telfCelular2 && 
+                inputs.eMail && 
+                inputs.eMail2 && 
+                inputs.provincia && 
+                inputs.ciudad && 
+                inputs.direccion && 
+                inputs.vigenciafirma){
                     
-        //         li_step_1.classList.remove('active')
-        //         li_step_2.classList.remove('disabled')
-        //         li_step_2.classList.add('active')
+                li_step_1.classList.remove('active')
+                li_step_2.classList.remove('disabled')
+                li_step_2.classList.add('active')
         
-        //         step1.classList.remove('active')
-        //         step2.classList.add('active')
-        //     }else{
+                step1.classList.remove('active')
+                step2.classList.add('active')
+            }else{
                 
-        //     }
-        // }
+            }
+        }
     })
 
     prev_step.addEventListener('click', () => {
@@ -415,6 +424,30 @@ function validateInputFileImg(fileName)
     }
 }
 
+function validateInputFilePdf(fileName)
+{
+   var filePdf = document.getElementById(`${fileName}`);
+   var fileRoute = filePdf.value;
+   var validExpression = /(.PDF|.pdf)$/i;
+   if(!validExpression.exec(fileRoute)){
+      alert('Asegurese de haber seleccionado un PDF');
+      filePdf.value = '';
+      return false;
+   }else{
+      if (filePdf.files && filePdf.files[0]) 
+      {
+            var visor = new FileReader();
+            visor.onload = function(e) 
+            {
+               document.getElementById(`visor_${fileName}`).innerHTML = 
+               '<embed src="'+e.target.result+'" width="350" />';
+            };
+            visor.readAsDataURL(filePdf.files[0]);
+            //document.getElementById(`pdf_${fileName}`).style.display = 'none';
+      }
+   }
+}
+
 function factElec(x){
     if(x == 0){
         document.getElementById('g_ruc_cedula_factura').classList.remove('b-hidden');
@@ -431,6 +464,9 @@ function factElec(x){
     
         document.getElementById('g_telefono_factura').classList.remove('b-hidden');
         document.getElementById('i_telefono_factura').setAttribute('required', 'required');
+
+        document.getElementById('g_comentarios_factura').classList.remove('b-hidden');
+        //document.getElementById('i_comentarios_factura').setAttribute('required', 'required');
     }else{
         document.getElementById('g_ruc_cedula_factura').classList.add('b-hidden');
         document.getElementById('i_ruc_cedula_factura').removeAttribute('required');
@@ -446,6 +482,9 @@ function factElec(x){
     
         document.getElementById('g_telefono_factura').classList.add('b-hidden');
         document.getElementById('i_telefono_factura').removeAttribute('required');
+
+        document.getElementById('g_comentarios_factura').classList.add('b-hidden');
+        //document.getElementById('i_comentarios_factura').removeAttribute('required');
     }
 }
 
