@@ -30,6 +30,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/natural-person/create', [NatutalPersonController::class, 'create'])->name('natural-person.create');
+Route::post('natural-person', [NatutalPersonController::class, 'store'])->name('natural-person.store');
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -38,9 +39,10 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('blogs', BlogController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('tests', TestController::class);
-    Route::resource('natural-person', NatutalPersonController::class)->except(['create']);
+    Route::resource('natural-person', NatutalPersonController::class)->except(['create', 'store']);
     
 });
+
 
 
 Route::get('/hola', function(){

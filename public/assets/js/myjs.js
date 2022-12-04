@@ -176,7 +176,8 @@ $(document).ready(function(){
         /* Validamos los campos requeridos */
         //console.log('Click')
         if(isValid){
-            console.log('Click')
+            //console.log('Click')
+            console.log(inputs)
             /* Validamos si los campos esta correctos */
             if(inputs.contenedor && 
                 inputs.nombres && 
@@ -198,9 +199,10 @@ $(document).ready(function(){
                 li_step_1.classList.remove('active')
                 li_step_2.classList.remove('disabled')
                 li_step_2.classList.add('active')
-        
+                
                 step1.classList.remove('active')
                 step2.classList.add('active')
+
             }else{
                 
             }

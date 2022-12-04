@@ -18,6 +18,17 @@
     <br>
     <div class="row d-flex justify-content-center">
         <div class="col-md-12">
+            @if ($errors->any())
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <strong>¡Revise los campos!</strong>
+                    @foreach ($errors->all() as $error)
+                        <span class="badge badge-danger">{{ $error }}</span>
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="wizard">
                 <div class="wizard-inner">
                     <div class="connecting-line"></div>
@@ -31,7 +42,7 @@
                     </ul>
                 </div>
 
-                {{ Form::open(['route' => 'natural-person.store', 'method' => 'POST', 'id' => 'natural__person__form']) }}
+                {{ Form::open(['route' => 'natural-person.store', 'method' => 'POST', 'id' => 'natural__person__form', 'enctype' => 'multipart/form-data']) }}
                     <div class="tab-content" id="main_form">
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             @include('natural-person.partials.formInput')
@@ -54,6 +65,26 @@
 </div>
 @section('page_js')
     <script src="{{ asset('assets/js/myjs.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('save') == 'true')
+        <script>
+            Swal.fire({
+                title: '¡Tu tramite fue subido con éxito!',
+                html: 'Si necesitas saber el estado de tu tramite o enviar el pago da click <a href=\"https://wa.me/message/X6UL7Y5D6MS4F1\" target=\"_blank\">AQUÍ</a> ',
+                icon: 'success',
+                allowOutsideClick: false,
+                imageUrl: 'web/public/img/working.png',
+                imageWidth: '100px',
+                imageAlt: 'Estamos trabajando',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                }
+            });
+        </script>
+    @endif
 @endsection
 @endsection
 

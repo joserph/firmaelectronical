@@ -51,5 +51,27 @@
     </div>
 
 </div>
+@section('page_js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('save') == 'true')
+        <script>
+            Swal.fire({
+                title: '¡Tu tramite fue subido con éxito!',
+                html: 'Si necesitas saber el estado de tu tramite o enviar el pago da click <a href=\"{{ url('/') }}\" target=\"_blank\">AQUÍ</a> ',
+                icon: 'success',
+                allowOutsideClick: false,
+                imageUrl: 'web/public/img/working.png',
+                imageWidth: '100px',
+                imageAlt: 'Estamos trabajando',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                }
+            });
+        </script>
+    @endif
+@endsection
 @endsection
 
