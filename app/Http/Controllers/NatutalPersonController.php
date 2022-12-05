@@ -16,7 +16,7 @@ class NatutalPersonController extends Controller
      */
     public function index()
     {
-        $natural_persons = NaturalPerson::paginate(15);
+        $natural_persons = NaturalPerson::orderBy('fecha_ingreso', 'DESC')->paginate(15);
 
         return view('natural-person.index', compact('natural_persons'));
     }
@@ -39,6 +39,7 @@ class NatutalPersonController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Bogota');
         $request->validate([
             'tipo_solicitud' => 'required',
             'contenedor' => 'required|in:0,1,2',
@@ -89,7 +90,7 @@ class NatutalPersonController extends Controller
         ]);
 
         $natural_person = NaturalPerson::create($request->all());
-        $user = Auth::user();
+
         if(Auth::check()){
             if($natural_person)
             {
@@ -112,7 +113,8 @@ class NatutalPersonController extends Controller
      */
     public function show($id)
     {
-        //
+
+        return view('natural-person.show');
     }
 
     /**
@@ -123,7 +125,9 @@ class NatutalPersonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $natural_person = NaturalPerson::find($id);
+
+        return view('natural-person.edit', compact('natural_person'));
     }
 
     /**
