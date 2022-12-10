@@ -154,6 +154,7 @@ $(document).ready(function(){
     })
 
     next_step.click(function(){
+        console.log('click')
         let curStep = $(this).closest('.tab-pane')
         let curStepBtn = curStep.attr('id')
         let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")

@@ -30,7 +30,7 @@
                 </div>
             @endif
             <div class="wizard">
-                <div class="wizard-inner">
+                {{-- <div class="wizard-inner">
                     <div class="connecting-line"></div>
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" id="li_step_1" class="active">
@@ -40,31 +40,69 @@
                             <a href="#step2" data-toggle="tab" id="step_2" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">2</span> <i>Archivos Adjuntos</i></a>
                         </li>
                     </ul>
+                </div> --}}
+                <div class="stepwizard col-md-offset-3">
+                    <div class="stepwizard-row setup-panel">
+                        <div class="stepwizard-step">
+                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                            <p>Step 1</p>
+                        </div>
+                        <div class="stepwizard-step">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                            <p>Step 2</p>
+                        </div>
+                    </div>
                 </div>
-
                 {{ Form::open(['route' => 'natural-person.store', 'method' => 'POST', 'id' => 'natural__person__form', 'enctype' => 'multipart/form-data']) }}
-                    <div class="tab-content" id="main_form">
+                    <div class="row setup-content" id="step-1">
+                        <div class="col-xs-6 col-md-offset-3">
+                            <div class="col-md-12">
+                                <h3> Step 1</h3>
+                                @include('natural-person.partials.formInput')
+                                <ul class="list-inline pull-right">
+                                    <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente <i class="fas fa-arrow-circle-right"></i></button>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row setup-content" id="step-2">
+                        <div class="col-xs-6 col-md-offset-3">
+                            <div class="col-md-12">
+                                <h3> Step 2</h3>
+                                @include('natural-person.partials.formField')
+                                <ul class="list-inline pull-right">
+                                    <button class="btn btn-secondary prevBtn pull-left" type="button"><i class="fas fa-arrow-circle-left"></i> Atras</button>
+                                    {{-- <button class="btn btn-primary nextBtn pull-right" type="button">Next</button> --}}
+                                    {{ Form::button('Guardar <i class="far fa-save"></i>', ['type' => 'submit', 'class' => 'btn btn-success nextBtn']) }}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {{ Form::close() }}
+                
+                    {{-- <div class="tab-content" id="main_form">
                         <div class="tab-pane active" role="tabpanel" id="step1">
-                            @include('natural-person.partials.formInput')
+                            
                             <ul class="list-inline pull-right">
                                 <li><button type="button" id="next-step" class="btn btn-primary">Siguiente <i class="fas fa-arrow-circle-right"></i></button></li>
                             </ul>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
-                            @include('natural-person.partials.formField')
+                            
                             <ul class="list-inline pull-right">
                                 <li><button type="button" id="prev-step" class="btn btn-secondary"><i class="fas fa-arrow-circle-left"></i> Atras</button></li>
                                 {{ Form::button('Guardar <i class="far fa-save"></i>', ['type' => 'submit', 'class' => 'btn btn-success']) }}
                             </ul>
                         </div>
-                    </div>
-                {{ Form::close() }}
+                    </div> --}}
+                
             </div>
         </div>
     </div>
 </div>
 @section('page_js')
-    <script src="{{ asset('assets/js/myjs.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/myjs.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/stepwizard.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('save') == 'true')
         <script>

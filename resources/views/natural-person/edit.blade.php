@@ -75,10 +75,7 @@
                         <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                         <p>Step 2</p>
                       </div>
-                      <div class="stepwizard-step">
-                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>Step 3</p>
-                      </div>
+                      
                     </div>
                   </div>
                   
@@ -120,15 +117,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row setup-content" id="step-3">
-                      <div class="col-xs-6 col-md-offset-3">
-                        <div class="col-md-12">
-                          <h3> Step 3</h3>
-                          <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-                          <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </form>
                   
                 </div>
@@ -137,6 +126,7 @@
 </div>
 @section('page_js')
     <script src="{{ asset('assets/js/myjs.js') }}"></script>
+    <script src="{{ asset('assets/js/stepwizard.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('save') == 'true')
         <script>

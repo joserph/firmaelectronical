@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var navListItems = $('div.setup-panel div a'),
-            allWells = $('.setup-content'),
-            allNextBtn = $('.nextBtn'),
-              allPrevBtn = $('.prevBtn');
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn'),
+        allPrevBtn = $('.prevBtn');
   
     allWells.hide();
   
@@ -29,23 +29,24 @@ $(document).ready(function () {
     });
   
     allNextBtn.click(function(){
-      console.log('click')
+        console.log('click')
         var curStep = $(this).closest(".setup-content"),
             curStepBtn = curStep.attr("id"),
             nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
   
-        $(".form-group").removeClass("has-error");
+        $(".form-control").removeClass("is-invalid");
         for(var i=0; i<curInputs.length; i++){
             if (!curInputs[i].validity.valid){
                 isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
+                $(curInputs[i]).closest(".form-control").addClass("is-invalid");
             }
         }
   
         if (isValid)
             nextStepWizard.removeAttr('disabled').trigger('click');
+            curStepBtn.disabled = true;
     });
   
     $('div.setup-panel div a.btn-primary').trigger('click');
