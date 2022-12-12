@@ -1,224 +1,190 @@
-$(document).ready(function(){
-    const natural__person__form = document.getElementById('natural__person__form')
-    const inputs__natural__person = document.querySelectorAll('#natural__person__form input')
-    const selects_natural_person = document.querySelectorAll('#natural__person__form select')
-    const files_natural_person = document.querySelectorAll('#natural__person__form file')
+const natural__person__form = document.getElementById('natural__person__form')
+const inputs__natural__person = document.querySelectorAll('#natural__person__form input')
+const selects_natural_person = document.querySelectorAll('#natural__person__form select')
+const files_natural_person = document.querySelectorAll('#natural__person__form file')
+const natural_person_next = document.getElementById('nextBtm');
     
     //const next_step = document.getElementById('next-step')
-    let next_step = $('#next-step');
-    let step1 = document.getElementById('step1')
-    let step2 = document.getElementById('step2')
-    const li_step_1 = document.getElementById('li_step_1')
-    const li_step_2 = document.getElementById('li_step_2')
-    const prev_step = document.getElementById('prev-step')
-    const step_2 = document.getElementById('step_2')
-    $('.invalid-feedback2').hide();
-    step_2.disabled = true
+    // let next_step = $('#next-step');
+    // let step1 = document.getElementById('step1')
+    // let step2 = document.getElementById('step2')
+    // const li_step_1 = document.getElementById('li_step_1')
+    // const li_step_2 = document.getElementById('li_step_2')
+    // const prev_step = document.getElementById('prev-step')
+    // const step_2 = document.getElementById('step_2')
+    // $('.invalid-feedback2').hide();
+    // step_2.disabled = true
 
-    const expresiones = {
-        usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-        nombre: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras y espacios, pueden llevar acentos.
-        password: /^.{4,12}$/, // 4 a 12 digitos.
-        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        telefono: /^\d{7,10}$/, // 7 a 14 numeros.
-        codigodactilar: /^[a-zA-Z0-9\_\-]{9,10}$/,
-        direccion: /^[a-zA-ZÀ-ÿ-z0-9'\.\-\s\,]+$/,
+const expresiones = {
+    usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+    nombre: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras y espacios, pueden llevar acentos.
+    password: /^.{4,12}$/, // 4 a 12 digitos.
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    telefono: /^\d{7,10}$/, // 7 a 14 numeros.
+    codigodactilar: /^[a-zA-Z0-9\_\-]{9,10}$/,
+    direccion: /^[a-zA-ZÀ-ÿ-z0-9'\.\-\s\,]+$/,
+}
+
+const inputs = {
+    contenedor: false,
+    nombres: false,
+    apellido1: false,
+    apellido2: false,
+    tipodocumento: false,
+    coddactilar: false,
+    sexo: false,
+    nacionalidad: false,
+    telfCelular: false,
+    telfCelular2: false,
+    eMail: false,
+    eMail2: false,
+    provincia: false,
+    ciudad: false,
+    direccion: false,
+    vigenciafirma: false,
+    express: false,
+}
+
+const validateInputsNaturalPerson = (e) => {
+    switch (e.target.name) {
+        case "contenedor":
+            validateSelect(e.target, 'contenedor')
+        break
+        case "nombres":
+            validateField(expresiones.nombre, e.target, 'nombres')
+        break
+        case "apellido1":
+            validateField(expresiones.nombre, e.target, 'apellido1')
+        break
+        case "apellido2":
+            validateField(expresiones.nombre, e.target, 'apellido2')
+        break
+        case "tipodocumento":
+            validateSelect(e.target, 'tipodocumento')
+        break
+        case "coddactilar":
+            validateField(expresiones.codigodactilar, e.target, 'coddactilar')
+        break
+        case "sexo":
+            validateSelect(e.target, 'sexo')
+        break
+        case "nacionalidad":
+            validateField(expresiones.nombre, e.target, 'nacionalidad')
+        break
+        case "telfCelular":
+            validateField(expresiones.telefono, e.target, 'telfCelular')
+        break
+        case "telfCelular2":
+            validateField(expresiones.telefono, e.target, 'telfCelular2')
+        break
+        case "eMail":
+            validateField(expresiones.correo, e.target, 'eMail')
+        break
+        case "eMail2":
+            validateField(expresiones.correo, e.target, 'eMail2')
+        break
+        case "provincia":
+            validateSelect(e.target, 'provincia')
+        break
+        case "ciudad":
+            validateField(expresiones.nombre, e.target, 'ciudad')
+        break
+        case "direccion":
+            validateField(expresiones.direccion, e.target, 'direccion')
+        break
+        case "vigenciafirma":
+            validateSelect(e.target, 'vigenciafirma')
+        break
+        case "express":
+            validateSelect(e.target, 'express')
+        break
+        case "nombre_partner":
+            validateField(expresiones.nombre, e.target, 'nombre_partner')
+        break
+        // case "nombres_factura":
+        //     validateField(expresiones.nombre, e.target, 'nombres_factura')
+        // break
+        // case "correo_factura":
+        //     validateField(expresiones.correo, e.target, 'correo_factura')
+        // break
+        // case "direccion_factura":
+        //     validateField(expresiones.direccion, e.target, 'direccion_factura')
+        // break
+        // case "telefono_factura":
+        //     validateField(expresiones.telefono, e.target, 'telefono_factura')
+        // break
     }
+}
 
-    const inputs = {
-        contenedor: false,
-        nombres: false,
-        apellido1: false,
-        apellido2: false,
-        tipodocumento: false,
-        coddactilar: false,
-        sexo: false,
-        nacionalidad: false,
-        telfCelular: false,
-        telfCelular2: false,
-        eMail: false,
-        eMail2: false,
-        provincia: false,
-        ciudad: false,
-        direccion: false,
-        vigenciafirma: false,
-        express: false,
+const validateField = (expretion, input, name) => {
+    if(expretion.test(input.value)){
+        document.getElementById(`i_${name}`).classList.remove('is-invalid')
+        document.getElementById(`i_${name}`).classList.add('is-valid')
+        document.getElementById(`error_${name}`).style.display = 'none'
+        inputs[name] = true
+    }else{
+        document.getElementById(`i_${name}`).classList.add('is-invalid')
+        document.getElementById(`error_${name}`).style.display = 'block'
+        inputs[name] = false
     }
+}
 
-    const validateInputsNaturalPerson = (e) => {
-        switch (e.target.name) {
-            case "contenedor":
-                validateSelect(e.target, 'contenedor')
-            break
-            case "nombres":
-                validateField(expresiones.nombre, e.target, 'nombres')
-            break
-            case "apellido1":
-                validateField(expresiones.nombre, e.target, 'apellido1')
-            break
-            case "apellido2":
-                validateField(expresiones.nombre, e.target, 'apellido2')
-            break
-            case "tipodocumento":
-                validateSelect(e.target, 'tipodocumento')
-            break
-            case "coddactilar":
-                validateField(expresiones.codigodactilar, e.target, 'coddactilar')
-            break
-            case "sexo":
-                validateSelect(e.target, 'sexo')
-            break
-            case "nacionalidad":
-                validateField(expresiones.nombre, e.target, 'nacionalidad')
-            break
-            case "telfCelular":
-                validateField(expresiones.telefono, e.target, 'telfCelular')
-            break
-            case "telfCelular2":
-                validateField(expresiones.telefono, e.target, 'telfCelular2')
-            break
-            case "eMail":
-                validateField(expresiones.correo, e.target, 'eMail')
-            break
-            case "eMail2":
-                validateField(expresiones.correo, e.target, 'eMail2')
-            break
-            case "provincia":
-                validateSelect(e.target, 'provincia')
-            break
-            case "ciudad":
-                validateField(expresiones.nombre, e.target, 'ciudad')
-            break
-            case "direccion":
-                validateField(expresiones.direccion, e.target, 'direccion')
-            break
-            case "vigenciafirma":
-                validateSelect(e.target, 'vigenciafirma')
-            break
-            case "express":
-                validateSelect(e.target, 'express')
-            break
-            case "nombre_partner":
-                validateField(expresiones.nombre, e.target, 'nombre_partner')
-            break
-            // case "nombres_factura":
-            //     validateField(expresiones.nombre, e.target, 'nombres_factura')
-            // break
-            // case "correo_factura":
-            //     validateField(expresiones.correo, e.target, 'correo_factura')
-            // break
-            // case "direccion_factura":
-            //     validateField(expresiones.direccion, e.target, 'direccion_factura')
-            // break
-            // case "telefono_factura":
-            //     validateField(expresiones.telefono, e.target, 'telefono_factura')
-            // break
-        }
-    }
-
-    const validateField = (expretion, input, name) => {
-        if(expretion.test(input.value)){
-            document.getElementById(`i_${name}`).classList.remove('is-invalid')
-            document.getElementById(`i_${name}`).classList.add('is-valid')
-            document.getElementById(`error_${name}`).style.display = 'none'
-            inputs[name] = true
-        }else{
-            document.getElementById(`i_${name}`).classList.add('is-invalid')
-            document.getElementById(`error_${name}`).style.display = 'block'
-            inputs[name] = false
-        }
-    }
-
-    inputs__natural__person.forEach((input) => {
-        input.addEventListener('keyup', validateInputsNaturalPerson);
-        input.addEventListener('blur', validateInputsNaturalPerson);
-    })
-
-    const validateSelect = (select, name) => {
-        if(select.value != ""){
-            document.getElementById(`i_${name}`).classList.remove('is-invalid')
-            document.getElementById(`i_${name}`).classList.add('is-valid')
-            document.getElementById(`error_${name}`).style.display = 'none'
-            inputs[name] = true
-        }else{
-            document.getElementById(`i_${name}`).classList.add('is-invalid')
-            document.getElementById(`i_${name}`).classList.remove('is-valid')
-            document.getElementById(`error_${name}`).style.display = 'block'
-            inputs[name] = false
-        }
-    }
-
-    selects_natural_person.forEach((select) => {
-        select.addEventListener('change', validateInputsNaturalPerson);
-        select.addEventListener('blur', validateInputsNaturalPerson);
-    })
-
-    next_step.click(function(){
-        console.log('click')
-        let curStep = $(this).closest('.tab-pane')
-        let curStepBtn = curStep.attr('id')
-        let curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='date']")
-        let curSlects = curStep.find("select")
-        let isValid = true;
-        //console.log(curSlects)
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-control").addClass("is-invalid");
-            }
-        }
-
-        for(var i=0; i<curSlects.length; i++){
-            if (!curSlects[i].validity.valid){
-                isValid = false;
-                $(curSlects[i]).closest(".custom-select").addClass("is-invalid");
-            }
-        }
-        /* Validamos los campos requeridos */
-        //console.log('Click')
-        if(isValid){
-            //console.log('Click')
-            console.log(inputs)
-            /* Validamos si los campos esta correctos */
-            if(inputs.contenedor && 
-                inputs.nombres && 
-                inputs.apellido1 && 
-                inputs.apellido2 && 
-                inputs.tipodocumento && 
-                inputs.coddactilar && 
-                inputs.sexo && 
-                inputs.nacionalidad && 
-                inputs.telfCelular && 
-                inputs.telfCelular2 && 
-                inputs.eMail && 
-                inputs.eMail2 && 
-                inputs.provincia && 
-                inputs.ciudad && 
-                inputs.direccion && 
-                inputs.vigenciafirma){
-                    
-                li_step_1.classList.remove('active')
-                li_step_2.classList.remove('disabled')
-                li_step_2.classList.add('active')
-                
-                step1.classList.remove('active')
-                step2.classList.add('active')
-
-            }else{
-                
-            }
-        }
-    })
-
-    prev_step.addEventListener('click', () => {
-        li_step_2.classList.remove('active')
-        li_step_2.classList.add('disabled')
-        li_step_1.classList.add('active')
-
-        step2.classList.remove('active')
-        step1.classList.add('active')
-    })
+inputs__natural__person.forEach((input) => {
+    input.addEventListener('keyup', validateInputsNaturalPerson);
+    input.addEventListener('blur', validateInputsNaturalPerson);
 })
+
+const validateSelect = (select, name) => {
+    if(select.value != ""){
+        document.getElementById(`i_${name}`).classList.remove('is-invalid')
+        document.getElementById(`i_${name}`).classList.add('is-valid')
+        document.getElementById(`error_${name}`).style.display = 'none'
+        inputs[name] = true
+    }else{
+        document.getElementById(`i_${name}`).classList.add('is-invalid')
+        document.getElementById(`i_${name}`).classList.remove('is-valid')
+        document.getElementById(`error_${name}`).style.display = 'block'
+        inputs[name] = false
+    }
+}
+
+selects_natural_person.forEach((select) => {
+    select.addEventListener('change', validateInputsNaturalPerson);
+    select.addEventListener('blur', validateInputsNaturalPerson);
+})
+
+natural_person_next.addEventListener('click', () => {
+    if(inputs.contenedor && 
+        inputs.nombres && 
+        inputs.apellido1 && 
+        inputs.apellido2 && 
+        inputs.tipodocumento && 
+        inputs.coddactilar && 
+        inputs.sexo && 
+        inputs.nacionalidad && 
+        inputs.telfCelular && 
+        inputs.telfCelular2 && 
+        inputs.eMail && 
+        inputs.eMail2 && 
+        inputs.provincia && 
+        inputs.ciudad && 
+        inputs.direccion && 
+        inputs.vigenciafirma){
+            
+    }else{
+        
+    }
+})
+
+prev_step.addEventListener('click', () => {
+    li_step_2.classList.remove('active')
+    li_step_2.classList.add('disabled')
+    li_step_1.classList.add('active')
+
+    step2.classList.remove('active')
+    step1.classList.add('active')
+})
+
 
 function ruc(x){
    
@@ -490,48 +456,3 @@ function factElec(x){
         //document.getElementById('i_comentarios_factura').removeAttribute('required');
     }
 }
-
-// ------------step-wizard-------------
-// $(document).ready(function () {
-//     $('.nav-tabs > li a[title]').tooltip();
-
-//     //Wizard
-//     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-
-//         var target = $(e.target);
-
-//         if (target.parent().hasClass('disabled')) {
-//             return false;
-//         }
-//     });
-
-//     $(".next-step").click(function (e) {
-//         /* Verificamos si estan llenos los campos requeridos */
-
-//         var active = $('.wizard .nav-tabs li.active');
-//         active.next().removeClass('disabled');
-//         nextTab(active);
-
-//     });
-//     $(".prev-step").click(function (e) {
-
-//         var active = $('.wizard .nav-tabs li.active');
-//         prevTab(active);
-
-//     });
-// });
-
-// function nextTab(elem) {
-//     $(elem).next().find('a[data-toggle="tab"]').click();
-// }
-// function prevTab(elem) {
-//     $(elem).prev().find('a[data-toggle="tab"]').click();
-// }
-
-
-// $('.nav-tabs').on('click', 'li', function() {
-//     $('.nav-tabs li.active').removeClass('active');
-//     $(this).addClass('active');
-// });
-
-

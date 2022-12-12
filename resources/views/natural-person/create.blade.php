@@ -41,15 +41,13 @@
                         </li>
                     </ul>
                 </div> --}}
-                <div class="stepwizard col-md-offset-3">
+                <div class="stepwizard col-md-6 offset-md-3">
                     <div class="stepwizard-row setup-panel">
                         <div class="stepwizard-step">
-                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                            <p>Step 1</p>
+                            <a href="#step-1" type="button" class="btn btn-primary">Datos Personales</a>
                         </div>
                         <div class="stepwizard-step">
-                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                            <p>Step 2</p>
+                            <a href="#step-2" type="button" class="btn btn-secondary step-2 disabled" disabled="disabled">Adjuntos</a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +58,7 @@
                                 <h3> Step 1</h3>
                                 @include('natural-person.partials.formInput')
                                 <ul class="list-inline pull-right">
-                                    <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente <i class="fas fa-arrow-circle-right"></i></button>
+                                    <button class="btn btn-primary nextBtn pull-right" id="nextBtm" type="button">Siguiente <i class="fas fa-arrow-circle-right"></i></button>
                                 </ul>
                             </div>
                         </div>
@@ -101,7 +99,7 @@
     </div>
 </div>
 @section('page_js')
-    {{-- <script src="{{ asset('assets/js/myjs.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/myjs.js') }}"></script>
     <script src="{{ asset('assets/js/stepwizard.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('save') == 'true')
