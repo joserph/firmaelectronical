@@ -148,7 +148,7 @@
     <div class="col-md-3">
         <div class="form-group" id="g_fecha_nacimiento">
             {{ Form::label('fecha_nacimiento', 'Fecha de Nacimiento') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::date('fecha_nacimiento', null, ['class' => 'form-control form-control-sm', 'required']) }}
+            {{ Form::date('fecha_nacimiento', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_fecha_nacimiento']) }}
             @error('fecha_nacimiento')
                 {{ $message }}
             @enderror

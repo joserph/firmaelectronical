@@ -32,7 +32,7 @@ ul,li,a:link
 }
 .stepwizard {
     display: table;
-    width: 50%;
+    width: 100%;
     position: relative;
 }
 .stepwizard-step button[disabled] {

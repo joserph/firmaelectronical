@@ -1,8 +1,10 @@
 const natural__person__form = document.getElementById('natural__person__form')
 const inputs__natural__person = document.querySelectorAll('#natural__person__form input')
+const dates__natural__person = document.querySelectorAll('#natural__person__form date')
 const selects_natural_person = document.querySelectorAll('#natural__person__form select')
 const files_natural_person = document.querySelectorAll('#natural__person__form file')
-const natural_person_next = document.getElementById('nextBtm');
+const natural_person_next = document.getElementById('nextBtm')
+let i_fecha_nacimiento = document.getElementById('i_fecha_nacimiento')
     
     //const next_step = document.getElementById('next-step')
     // let next_step = $('#next-step');
@@ -23,6 +25,7 @@ const expresiones = {
     telefono: /^\d{7,10}$/, // 7 a 14 numeros.
     codigodactilar: /^[a-zA-Z0-9\_\-]{9,10}$/,
     direccion: /^[a-zA-ZÀ-ÿ-z0-9'\.\-\s\,]+$/,
+    fecha: /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/,
 }
 
 const inputs = {
@@ -43,6 +46,7 @@ const inputs = {
     direccion: false,
     vigenciafirma: false,
     express: false,
+    fecha_nacimiento: false,
 }
 
 const validateInputsNaturalPerson = (e) => {
@@ -101,6 +105,9 @@ const validateInputsNaturalPerson = (e) => {
         case "nombre_partner":
             validateField(expresiones.nombre, e.target, 'nombre_partner')
         break
+        case "fecha_nacimiento":
+            validateDate(e.target, 'fecha_nacimiento')
+        break
         // case "nombres_factura":
         //     validateField(expresiones.nombre, e.target, 'nombres_factura')
         // break
@@ -132,6 +139,24 @@ const validateField = (expretion, input, name) => {
 inputs__natural__person.forEach((input) => {
     input.addEventListener('keyup', validateInputsNaturalPerson);
     input.addEventListener('blur', validateInputsNaturalPerson);
+})
+
+const validateDate = (date, name) => {
+    if(i_fecha_nacimiento.value.length >= 10){
+        document.getElementById(`i_${name}`).classList.remove('is-invalid')
+        document.getElementById(`i_${name}`).classList.add('is-valid')
+        document.getElementById(`error_${name}`).style.display = 'none'
+        inputs[name] = true
+    }else{
+        document.getElementById(`i_${name}`).classList.add('is-invalid')
+        document.getElementById(`error_${name}`).style.display = 'block'
+        inputs[name] = false
+    }
+}
+
+dates__natural__person.forEach((date) => {
+    date.addEventListener('keyup', validateInputsNaturalPerson);
+    date.addEventListener('blur', validateInputsNaturalPerson);
 })
 
 const validateSelect = (select, name) => {

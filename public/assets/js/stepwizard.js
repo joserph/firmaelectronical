@@ -31,7 +31,7 @@ $(document).ready(function () {
     });
   
     allNextBtn.click(function(){
-        console.log('click')
+        //console.log('click')
         
         var curStep = $(this).closest(".setup-content"),
             curStepBtn = curStep.attr("id"),

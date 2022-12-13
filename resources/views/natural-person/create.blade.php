@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                 </div> --}}
-                <div class="stepwizard col-md-6 offset-md-3">
+                <div class="stepwizard">
                     <div class="stepwizard-row setup-panel">
                         <div class="stepwizard-step">
                             <a href="#step-1" type="button" class="btn btn-primary">Datos Personales</a>
@@ -55,7 +55,6 @@
                     <div class="row setup-content" id="step-1">
                         <div class="col-xs-6 col-md-offset-3">
                             <div class="col-md-12">
-                                <h3> Step 1</h3>
                                 @include('natural-person.partials.formInput')
                                 <ul class="list-inline pull-right">
                                     <button class="btn btn-primary nextBtn pull-right" id="nextBtm" type="button">Siguiente <i class="fas fa-arrow-circle-right"></i></button>
@@ -66,7 +65,6 @@
                     <div class="row setup-content" id="step-2">
                         <div class="col-xs-6 col-md-offset-3">
                             <div class="col-md-12">
-                                <h3> Step 2</h3>
                                 @include('natural-person.partials.formField')
                                 <ul class="list-inline pull-right">
                                     <button class="btn btn-secondary prevBtn pull-left" type="button"><i class="fas fa-arrow-circle-left"></i> Atras</button>
