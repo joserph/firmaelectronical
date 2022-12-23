@@ -61,7 +61,7 @@
     </div>
     <div class="col-md-4">
         <div class="form-group" id="g_tipodocumento">
-            {{ Form::label('tipodocumento', 'Tipo de Certificado') }} <i class="fab fa-diaspora text-warning"></i>
+            {{ Form::label('tipodocumento', 'Documento de Identidad') }} <i class="fab fa-diaspora text-warning"></i>
             {{ Form::select('tipodocumento', [
                 'CEDULA' => 'CEDULA', 
                 'PASAPORTE' => 'PASAPORTE'],

@@ -203,7 +203,7 @@
     <div class="col-md-9">
         <div class="form-group b-hidden" id="g_comentarios_factura">
             {{ Form::label('comentarios_factura', 'Comentarios') }}
-            {{ Form::textarea('comentarios_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_comentarios_factura', 'placeholder' => '0912345678']) }}
+            {{ Form::textarea('comentarios_factura', null, ['class' => 'form-control form-control-sm', 'id' => 'i_comentarios_factura']) }}
             @error('comentarios_factura')
                 {{ $message }}
             @enderror
@@ -250,8 +250,32 @@
     <div class="col-md-12">
         <hr>
     </div>
-    <div class="col-md-5">
-        <div class="form-group" id="g_sexo">
+    @isset($natural_person)
+    <div class="col-md-3">
+        <div class="form-group" id="g_estatus_pago">
+            {{ Form::label('estatus_pago', 'Estatus de Pago') }}
+            {{ Form::select('estatus_pago', [
+                'Abundancia' => 'Abundancia',
+                'Exito' => 'Éxito',
+                'Oficina' => 'Oficina',
+                'Pagado' => 'Pagado',
+                'Pendiente' => 'Pendiente', 
+                'Redes' => 'Redes',
+                'Ricardo' => 'Ricardo',
+                'Virginia' => 'Virginia'],
+                null, ['class' => 'custom-select custom-select-sm', 'id' => 'i_estatus_pago', 'placeholder' => 'Seleccione Estatus']) }}
+            @error('estatus_pago')
+                {{ $message }}
+            @enderror
+            <div class="invalid-feedback2" id="error_estatus_pago">
+                Debe seleccionar Tipo de Servicio
+            </div>
+        </div>
+    </div>
+    @endisset
+    
+    <div class="col-md-4">
+        <div class="form-group" id="g_express">
             {{ Form::label('express', 'Servicio flash Costo $20 mas iva adicionales (Entrega 15 Minutos)') }} <i class="fab fa-diaspora text-warning"></i>
             {{ Form::select('express', [
                 'Si' => 'Si', 
@@ -265,7 +289,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="form-group" id="g_nombre_partner">
             {{ Form::label('nombre_partner', 'Campo opcional Nombre y Apellido del Partner') }}
             {{ Form::text('nombre_partner', null, ['class' => 'form-control form-control-sm', 'id' => 'i_nombre_partner', 'placeholder' => 'Calos Andres', 'autocomplete' => 'off']) }}

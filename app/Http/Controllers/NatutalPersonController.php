@@ -114,7 +114,7 @@ class NatutalPersonController extends Controller
     public function show($id)
     {
         $natural_person = NaturalPerson::find($id);
-
+        //dd($natural_person);
         return view('natural-person.show', compact('natural_person'));
     }
 
