@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\LegalRepresentativeControlle;
 use App\Http\Controllers\NatutalPersonController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TestController;
@@ -29,8 +30,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/natural-person/create', [NatutalPersonController::class, 'create'])->name('natural-person.create');
 Route::post('natural-person', [NatutalPersonController::class, 'store'])->name('natural-person.store');
+
+Route::get('/legal-representative/create', [LegalRepresentativeControlle::class, 'create'])->name('legal-representative.create');
+Route::post('legal-representative', [LegalRepresentativeControlle::class, 'store'])->name('legal-representative.store');
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -40,7 +45,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('permissions', PermissionController::class);
     Route::resource('tests', TestController::class);
     Route::resource('natural-person', NatutalPersonController::class)->except(['create', 'store']);
-    
+    Route::resource('legal-representative', LegalRepresentativeControlle::class)->except(['create', 'store']);
 });
 
 
