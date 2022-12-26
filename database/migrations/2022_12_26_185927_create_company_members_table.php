@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNaturalPeopleTable extends Migration
+class CreateCompanyMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateNaturalPeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('natural_people', function (Blueprint $table) {
+        Schema::create('company_members', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('tipo_solicitud', ['1']);
+            $table->enum('tipo_solicitud', ['2']);
             $table->enum('contenedor', ['0', '1', '2']);
             $table->string('nombres');
             $table->string('apellido1');
@@ -24,7 +24,7 @@ class CreateNaturalPeopleTable extends Migration
             $table->enum('tipodocumento', ['CEDULA', 'PASAPORTE']);
             $table->string('numerodocumento');
             $table->string('coddactilar')->nullable();
-            $table->string('ruc_personal')->nullable();
+            //$table->string('ruc_personal')->nullable();
             $table->enum('sexo', ['HOMBRE', 'MUJER']);
             $table->date('fecha_nacimiento');
             $table->string('nacionalidad');
@@ -33,15 +33,29 @@ class CreateNaturalPeopleTable extends Migration
             $table->string('telfFijo')->nullable();
             $table->string('eMail');
             $table->string('eMail2');
+            $table->string('empresa');
+            $table->string('ruc_empresa');
+            $table->string('cargo');
+            $table->string('motivo');
+            $table->string('unidad');
             $table->string('provincia');
             $table->string('ciudad');
             $table->text('direccion');
+            $table->string('nombresRL');
+            $table->string('apellidosRL');
+            $table->enum('tipodocumentoRL', ['CEDULA', 'PASAPORTE']);
+            $table->string('numerodocumentoRL');
             $table->enum('vigenciafirma', ['7 días', '1 año', '2 años', '3 años', '4 años', '5 años']);
             $table->enum('express', ['Si', 'No']);
             $table->string('f_cedulaFront');
             $table->string('f_cedulaBack');
             $table->string('f_selfie');
             $table->string('f_copiaruc')->nullable();
+            $table->string('f_nombramiento');
+            $table->string('f_nombramiento2')->nullable();
+            $table->string('f_constitucion');
+            $table->string('f_documentoRL');
+            $table->string('f_autreprelegal');
             $table->string('f_adicional1')->nullable(); // Documento Opcional Autorización Partner
             $table->string('f_adicional2')->nullable();
             $table->string('f_adicional3')->nullable();
@@ -66,7 +80,7 @@ class CreateNaturalPeopleTable extends Migration
             $table->unsignedBigInteger('user_update')->nullable();
 
             $table->foreign('user_update')->references('id')->on('users');
-
+            
             $table->timestamps();
         });
     }
@@ -78,6 +92,6 @@ class CreateNaturalPeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('natural_people');
+        Schema::dropIfExists('company_members');
     }
 }

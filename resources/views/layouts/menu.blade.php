@@ -22,7 +22,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('natural-person.index') }}">Persona Natural</a>
                 <a class="collapse-item" href="{{ route('legal-representative.index') }}">Representante Legal</a>
-                <a class="collapse-item" href="#">Miembro de Empresa</a>
+                <a class="collapse-item" href="{{ route('company-member.index') }}">Miembro de Empresa</a>
             </div>
         </div>
     </li>
@@ -38,7 +38,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('natural-person.create') }}">Persona Natural</a>
                 <a class="collapse-item" href="{{ route('legal-representative.create') }}">Representante Legal</a>
-                <a class="collapse-item" href="#">Miembro de Empresa</a>
+                <a class="collapse-item" href="{{ route('company-member.create') }}">Miembro de Empresa</a>
             </div>
         </div>
     </li>
@@ -77,7 +77,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('natural-person.create') }}">Persona Natural</a>
                 <a class="collapse-item" href="{{ route('legal-representative.create') }}">Representante Legal</a>
-                <a class="collapse-item" href="#">Miembro de Empresa</a>
+                <a class="collapse-item" href="{{ route('company-member.create') }}">Miembro de Empresa</a>
             </div>
         </div>
     </li>
