@@ -65,8 +65,8 @@ class CreateLegalRepresentativesTable extends Migration
             $table->string('direccion_factura')->nullable();
             $table->string('telefono_factura')->nullable();
             $table->string('comentarios_factura')->nullable();
-            $table->dateTimeTz('fecha_ingreso')->nullable();
-            $table->dateTimeTz('fecha_envio')->nullable();
+            $table->timestamp('fecha_ingreso')->nullable();
+            $table->timestamp('fecha_envio')->nullable();
             $table->string('estatus')->nullable();
             
             $table->unsignedBigInteger('user_update')->nullable();

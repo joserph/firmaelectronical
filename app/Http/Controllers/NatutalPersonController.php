@@ -102,7 +102,6 @@ class NatutalPersonController extends Controller
                 return redirect()->route('natural-person.create')->with('save', 'true');
             } 
         }
-          
     }
 
     /**
@@ -204,6 +203,9 @@ class NatutalPersonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $natural_person = NaturalPerson::find($id);
+        $natural_person->delete();
+
+        return redirect()->route('natural-person.index')->with('delete', 'true');
     }
 }

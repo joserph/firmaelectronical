@@ -45,7 +45,11 @@
                     <td class="text-center"><small><a href="{{ route('natural-person.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a></small></td>
                     <td class="text-center"><small><a href="{{ route('natural-person.show', $item->id) }}" class="btn btn-success btn-sm"><i class="fas fa-file-upload"></i></a></small></td>
                     <td class="text-center"><small><a href="{{ route('natural-person.show', $item->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></a></small></td>
-                    <td class="text-center"><small><a href="{{ route('natural-person.show', $item->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></small></td>
+                    <td class="text-center"><small>
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['natural-person.destroy', $item->id], 'style' => 'display:inline']) !!}
+                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm']) !!}
+                        {!! Form::close() !!}
+                    </small></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -65,6 +69,25 @@
                 imageUrl: 'web/public/img/working.png',
                 imageWidth: '100px',
                 imageAlt: 'Estamos trabajando',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                }
+            });
+        </script>
+    @endif
+    @if (session('delete') == 'true')
+        <script>
+            Swal.fire({
+                title: '¡Tu firma fue eliminada con éxito!',
+                html: '',
+                icon: 'success',
+                allowOutsideClick: false,
+                imageUrl: 'web/public/img/working.png',
+                imageWidth: '100px',
+                imageAlt: '',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ok'
                 }).then((result) => {

@@ -1,4 +1,7 @@
 <div class="form-row">
+    @php
+        date_default_timezone_set('America/Guayaquil');
+    @endphp
     {{ Form::hidden('tipo_solicitud', 1) }}
     {{ Form::hidden('fecha_ingreso', date("Y-m-d H:i:s")) }}
     {{ Form::hidden('fecha_envio', date("Y-m-d H:i:s")) }}

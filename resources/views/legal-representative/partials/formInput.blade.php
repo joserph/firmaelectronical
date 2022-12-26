@@ -1,4 +1,7 @@
 <div class="form-row">
+    @php
+        date_default_timezone_set('America/Guayaquil');
+    @endphp
     {{ Form::hidden('tipo_solicitud', 1) }}
     {{ Form::hidden('fecha_ingreso', date("Y-m-d H:i:s")) }}
     {{ Form::hidden('fecha_envio', date("Y-m-d H:i:s")) }}
@@ -233,7 +236,7 @@
     <div class="col-md-3">
         <div class="form-group " id="g_ruc_empresa">
             {{ Form::label('ruc_empresa', 'RUC Empresa') }} <i class="fab fa-diaspora text-warning"></i>
-            {{ Form::text('ruc_empresa', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_ruc_empresa', 'placeholder' => '0102698867001']) }}
+            {{ Form::text('ruc_empresa', null, ['class' => 'form-control form-control-sm', 'required', 'onblur' => 'validarDocumento("ruc_empresa")', 'id' => 'i_ruc_empresa', 'placeholder' => '0102698867001']) }}
             @error('ruc_empresa')
                 {{ $message }}
             @enderror
@@ -244,7 +247,7 @@
     </div>
     <div class="col-md-3">
         <div class="form-group " id="g_cargo">
-            {{ Form::label('cargo', 'RUC Empresa') }} <i class="fab fa-diaspora text-warning"></i>
+            {{ Form::label('cargo', 'Cargo') }} <i class="fab fa-diaspora text-warning"></i>
             {{ Form::text('cargo', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_cargo', 'placeholder' => 'GERENTE GENERAL']) }}
             @error('cargo')
                 {{ $message }}
