@@ -2,10 +2,19 @@
     @php
         date_default_timezone_set('America/Guayaquil');
     @endphp
+    @isset($company_member)
+        @auth
+        {{ Form::hidden('user_update', Auth::user()->id) }}
+        @endauth
+    @else
+        @auth
+        {{ Form::hidden('user_update', Auth::user()->id) }}
+        {{ Form::hidden('user_id', Auth::user()->id) }}
+        @endauth
+    @endisset
     {{ Form::hidden('tipo_solicitud', 1) }}
     {{ Form::hidden('fecha_ingreso', date("Y-m-d H:i:s")) }}
     {{ Form::hidden('fecha_envio', date("Y-m-d H:i:s")) }}
-    {{ Form::hidden('estatus_pago', null) }}
     <div class="col-md-12 text-warning">
     (<i class="fab fa-diaspora text-warning"></i>) <em>Campo Obligatorio</em> 
     </div>
@@ -253,6 +262,30 @@
                 {{ $message }}
             @enderror
             <div class="invalid-feedback2" id="error_cargo">
+                No acepta letras ni caracteres especiales
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group " id="g_motivo">
+            {{ Form::label('motivo', 'Motivo') }} <i class="fab fa-diaspora text-warning"></i>
+            {{ Form::text('motivo', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_motivo', 'placeholder' => 'GERENTE GENERAL']) }}
+            @error('motivo')
+                {{ $message }}
+            @enderror
+            <div class="invalid-feedback2" id="error_motivo">
+                No acepta letras ni caracteres especiales
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group " id="g_unidad">
+            {{ Form::label('unidad', 'Unidad') }} <i class="fab fa-diaspora text-warning"></i>
+            {{ Form::text('unidad', null, ['class' => 'form-control form-control-sm', 'required', 'id' => 'i_unidad', 'placeholder' => 'GERENTE GENERAL']) }}
+            @error('unidad')
+                {{ $message }}
+            @enderror
+            <div class="invalid-feedback2" id="error_unidad">
                 No acepta letras ni caracteres especiales
             </div>
         </div>

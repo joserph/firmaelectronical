@@ -63,8 +63,10 @@ class CreateNaturalPeopleTable extends Migration
             $table->timestamp('fecha_envio')->nullable();
             $table->string('estatus')->nullable();
             
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('user_update')->nullable();
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('user_update')->references('id')->on('users');
 
             $table->timestamps();

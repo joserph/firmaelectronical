@@ -6,8 +6,11 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Ver Firma Representante Legal</li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+            @auth()
+                <li class="breadcrumb-item"><a href="{{ route('legal-representative.index') }}">Lista de Registros Representante Legal</a></li>
+            @endauth
+            <li class="breadcrumb-item active" aria-current="page">Ver Firma Representante Legal</li>
         </ol>
     </nav>
     <!-- Page Heading -->
@@ -71,7 +74,7 @@
                         </tr>
                         <tr>
                             <th>Fecha de Nacimiento</th>
-                            <td>{{ $legal_representative->fecha_nacimiento }}</td>
+                            <td>{{ date('d/m/Y', strtotime($legal_representative->fecha_nacimiento)) }}</td>
                         </tr>
                         <tr>
                             <th>Nacionalidad</th>
@@ -216,7 +219,7 @@
                         </tr>
                         <tr>
                             <th>Fecha</th>
-                            <td>{{ $legal_representative->fecha_deposito }}</td>
+                            <td>{{ date('d/m/Y', strtotime($legal_representative->fecha_deposito)) }}</td>
                         </tr>
                         <tr>
                             <th>Número de Depósito</th>

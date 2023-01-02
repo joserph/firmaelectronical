@@ -7,8 +7,11 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Crear Firma Miembro de Empresa</li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+            @auth()
+                <li class="breadcrumb-item"><a href="{{ route('company-member.index') }}">Lista de Registros Miembro de Empresa</a></li>
+            @endauth
+            <li class="breadcrumb-item active" aria-current="page">Crear Firma Miembro de Empresa</li>
         </ol>
     </nav>
     <!-- Page Heading -->

@@ -9,7 +9,9 @@
         </ol>
     </nav>
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Lista de Registros Representante Legal</h1>
+    <h1 class="h3 mb-2 text-gray-800">Lista de Registros Representante Legal
+        <a href="{{ route('legal-representative.create') }}" class="btn btn-info fa-pull-right"><i class="fas fa-plus-circle"></i> Agregar</a>
+    </h1>
     
     <div class="table-responsive">
         <table class="table table-hover table-bordered table-sm">

@@ -272,6 +272,8 @@
             </div>
         </div>
     </div>
+    @else
+        {{ Form::hidden('estatus_pago', null) }}
     @endisset
     
     <div class="col-md-4">

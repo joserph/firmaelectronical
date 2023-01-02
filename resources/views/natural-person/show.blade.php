@@ -6,8 +6,11 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Ver Firma Persona Natural</li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+            @auth()
+                <li class="breadcrumb-item"><a href="{{ route('natural-person.index') }}">Lista de Registros Persona Natural</a></li>
+            @endauth
+            <li class="breadcrumb-item active" aria-current="page">Ver Firma Persona Natural</li>
         </ol>
     </nav>
     <!-- Page Heading -->
@@ -71,7 +74,7 @@
                         </tr>
                         <tr>
                             <th>Fecha de Nacimiento</th>
-                            <td>{{ $natural_person->fecha_nacimiento }}</td>
+                            <td>{{ date('d/m/Y', strtotime($natural_person->fecha_nacimiento)) }}</td>
                         </tr>
                         <tr>
                             <th>Nacionalidad</th>
@@ -126,8 +129,10 @@
                                     <span class="badge badge-warning">REDES</span>
                                 @elseif ($natural_person->estatus_pago == 'Ricardo')
                                     <span class="badge badge-light">RICARDO</span>
+                                @elseif ($natural_person->estatus_pago == 'Virginia')
+                                    <span class="badge badge-light">VIRGINIA</span>
                                 @else
-                                    <span class="badge badge-dark">VIRGINIA</span>
+                                    <span class="badge badge-dark">SIN ESTATUS DE PAGO</span>
                                 @endif
                             </td>
                         </tr>
@@ -190,7 +195,7 @@
                         </tr>
                         <tr>
                             <th>Fecha</th>
-                            <td>{{ $natural_person->fecha_deposito }}</td>
+                            <td>{{ date('d/m/Y', strtotime($natural_person->fecha_deposito)) }}</td>
                         </tr>
                         <tr>
                             <th>Número de Depósito</th>

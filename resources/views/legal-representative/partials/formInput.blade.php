@@ -2,10 +2,20 @@
     @php
         date_default_timezone_set('America/Guayaquil');
     @endphp
+    @isset($legal_representative)
+        @auth
+        {{ Form::hidden('user_update', Auth::user()->id) }}
+        @endauth
+    @else
+        @auth
+        {{ Form::hidden('user_update', Auth::user()->id) }}
+        {{ Form::hidden('user_id', Auth::user()->id) }}
+        @endauth
+    @endisset
+    
     {{ Form::hidden('tipo_solicitud', 1) }}
     {{ Form::hidden('fecha_ingreso', date("Y-m-d H:i:s")) }}
     {{ Form::hidden('fecha_envio', date("Y-m-d H:i:s")) }}
-    {{ Form::hidden('estatus_pago', null) }}
     <div class="col-md-12 text-warning">
     (<i class="fab fa-diaspora text-warning"></i>) <em>Campo Obligatorio</em> 
     </div>

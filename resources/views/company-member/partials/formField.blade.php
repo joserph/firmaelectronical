@@ -361,7 +361,7 @@
     <div class="col-md-12">
         <hr>
     </div>
-    @isset($legal_representative)
+    @isset($company_member)
     <div class="col-md-3">
         <div class="form-group" id="g_estatus_pago">
             {{ Form::label('estatus_pago', 'Estatus de Pago') }}
@@ -383,6 +383,8 @@
             </div>
         </div>
     </div>
+    @else
+        {{ Form::hidden('estatus_pago', null) }}
     @endisset
     
     <div class="col-md-4">

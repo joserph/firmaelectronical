@@ -7,8 +7,11 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Crear Firma Representante Legal</li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+            @auth()
+                <li class="breadcrumb-item"><a href="{{ route('legal-representative.index') }}">Lista de Registros Representante Legal</a></li>
+            @endauth
+            <li class="breadcrumb-item active" aria-current="page">Crear Firma Representante Legal</li>
         </ol>
     </nav>
     <!-- Page Heading -->

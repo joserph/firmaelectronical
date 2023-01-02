@@ -2,10 +2,21 @@
     @php
         date_default_timezone_set('America/Guayaquil');
     @endphp
+    @isset($natural_person)
+        @auth
+        {{ Form::hidden('user_update', Auth::user()->id) }}
+        @endauth
+    @else
+        @auth
+        {{ Form::hidden('user_update', Auth::user()->id) }}
+        {{ Form::hidden('user_id', Auth::user()->id) }}
+        @endauth
+    @endisset
+    
     {{ Form::hidden('tipo_solicitud', 1) }}
     {{ Form::hidden('fecha_ingreso', date("Y-m-d H:i:s")) }}
     {{ Form::hidden('fecha_envio', date("Y-m-d H:i:s")) }}
-    {{ Form::hidden('estatus_pago', null) }}
+    
     <div class="col-md-12 text-warning">
     (<i class="fab fa-diaspora text-warning"></i>) <em>Campo Obligatorio</em> 
     </div>
@@ -106,11 +117,11 @@
             {{ Form::label('con_ruc', 'Con RUC') }}
             <br>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" onclick="ruc(0)" type="radio" name="con_ruc" id="i_con_ruc_no" value="No" checked>
+                <input class="form-check-input" onclick="ruc(0)" type="radio" name="con_ruc" id="i_con_ruc_no" value="No" @isset($natural_person) @if(!$natural_person->ruc_personal) checked @endif @else checked @endisset >
                 <label class="form-check-label" for="i_con_ruc_no">No</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" onclick="ruc(1)" type="radio" name="con_ruc" id="i_con_ruc_si" value="Si">
+                <input class="form-check-input" onclick="ruc(1)" type="radio" name="con_ruc" id="i_con_ruc_si" value="Si" @isset($natural_person) @if($natural_person->ruc_personal) checked @endif @endisset>
                 <label class="form-check-label" for="i_con_ruc_si">Si</label>
             </div>
             @error('con_ruc')
@@ -121,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 b-hidden" id="b_ruc_personal">
+    <div class="col-md-3 @isset($natural_person) @if($natural_person->ruc_personal) @else b-hidden @endif @else b-hidden @endisset" id="b_ruc_personal">
         <div class="form-group " id="g_ruc_personal">
             {{ Form::label('ruc_personal', 'RUC Personal') }} <i class="fab fa-diaspora text-warning"></i>
             {{ Form::text('ruc_personal', null, ['class' => 'form-control form-control-sm', 'maxlength' => '13', 'onblur' => 'validarDocumento("ruc_personal")', 'id' => 'i_ruc_personal', 'placeholder' => '0102698867001', 'maxlength' => '13']) }}
