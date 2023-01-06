@@ -63,8 +63,10 @@ class TestController extends Controller
         $contents = Storage::disk('public')->get('img/' . $name);
         
         $test = $this->pathToUploadedFile($url, true);
-        
-        $file = Storage::disk("google")->putFileAs("", $test, $name);
+        // SUBIMOS AL GOOGLE DRIVE O AMAZON S3
+        //$file = Storage::disk("google")->putFileAs("", $test, $name);
+
+
         //dd($file);
         //$test = file($url);
         //$test = new File($contents);
@@ -98,13 +100,13 @@ class TestController extends Controller
                 $detail2 = Storage::disk("google")->getMetadata($f);
             }
         }
-        
+        */
         Test::create([
             'titulo' => $request->titulo,
             'contenido' => $request->contenido,
             'archivo' => $name,
-            'path' => $detail2['path']
-        ]);*/
+            'path' => $url
+        ]);
         return redirect()->route('tests.index');
 
     }
