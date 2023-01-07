@@ -14,7 +14,7 @@
     </div>
     @isset($test)
         <div class="col-sm-12">
-            <img src="{{ $url }}" class="img-fluid" alt="...">
+            <img src="{{ asset('storage/img/' . $test->archivo) }}" class="img-fluid" alt="...">
         </div>
     @endisset
     

@@ -147,7 +147,9 @@ class TestController extends Controller
     public function edit($id)
     {
         $test = Test::find($id);
-        $url =  Storage::disk("google")->url($test->path);
+        //$url =  Storage::disk("google")->url($test->path);
+        $url = $test->path;
+        //dd($url);
 
         return view('tests.edit', compact('test', 'url'));
     }
