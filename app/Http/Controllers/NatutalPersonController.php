@@ -45,28 +45,36 @@ class NatutalPersonController extends Controller
         date_default_timezone_set('America/Bogota');
         // MANIPULACION DE ARCHIVOS (IMAGENES Y PDFs).
         // IMGs
-        $cedulaFront = $request->file('f_cedulaFront');
-        $cedulaBack = $request->file('f_cedulaBack');
-        $selfie = $request->file('f_selfie');
-        // NUEVO NOMBRES
-        $name_cedulaFront = 'cedulaFront_' . $request->numerodocumento . '_' . time() . '.' . $cedulaFront->guessExtension();
-        $name_cedulaBack = 'cedulaBack_' . $request->numerodocumento . '_' . time() . '.' . $cedulaBack->guessExtension();
-        $name_selfie = 'selfie_' . $request->numerodocumento . '_' . time() . '.' . $selfie->guessExtension();
-        // PATH
-        $url_cedulaFront = storage_path('app\public\img/cedulaFront/' . $name_cedulaFront);
-        $url_cedulaBack = storage_path('app\public\img/cedulaBack/' . $name_cedulaBack);
-        $url_selfie = storage_path('app\public\img/selfie/' . $name_selfie);
-        // OPTIMIZAR IMAGEN
-        $img_cedulaFront =  Image::make($cedulaFront);
-        $img_cedulaFront->resize(333, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $img_cedulaFront->save($url_cedulaFront);
-        Storage::disk('public')->get('img/cedulaFront/' . $name_cedulaFront);
-
-        $request['cedulaFront'] = $name_cedulaFront;
+        $name_cedulaFront = $this->optimizeImage($request->file('f_cedulaFront'), 'cedulaFront', $request->numerodocumento);
+        $name_cedulaBack = $this->optimizeImage($request->file('f_cedulaBack'), 'cedulaBack', $request->numerodocumento);
+        $name_selfie = $this->optimizeImage($request->file('f_selfie'), 'selfie', $request->numerodocumento);
         // PDFs
-
+        if($request->file('f_copiaruc')){
+            $name_copiaruc = $this->uploadPDF($request->file('f_copiaruc'), 'copiaruc', $request->numerodocumento);
+        }else{
+            $name_copiaruc = $request->f_copiaruc;
+        }
+        if($request->file('f_adicional1')){
+            
+            $name_adicional1 = $this->uploadPDF($request->file('f_adicional1'), 'adicional1', $request->numerodocumento);
+        }else{
+            $name_adicional1 = $request->f_adicional1;
+        }
+        if($request->file('f_adicional2')){
+            $name_adicional2 = $this->uploadPDF($request->file('f_adicional2'), 'adicional2', $request->numerodocumento);
+        }else{
+            $name_adicional2 = $request->f_adicional2;
+        }
+        if($request->file('f_adicional3')){
+            $name_adicional3 = $this->uploadPDF($request->file('f_adicional3'), 'adicional3', $request->numerodocumento);
+        }else{
+            $name_adicional3 = $request->f_adicional3;
+        }
+        if($request->file('f_adicional4')){
+            $name_adicional4 = $this->uploadPDF($request->file('f_adicional4'), 'adicional4', $request->numerodocumento);
+        }else{
+            $name_adicional4 = $request->f_adicional4;
+        }
 
         $natural_person = NaturalPerson::create([
             'tipo_solicitud'        => $request->tipo_solicitud,
@@ -92,13 +100,13 @@ class NatutalPersonController extends Controller
             'vigenciafirma'         => $request->vigenciafirma,
             'express'               => $request->express,
             'f_cedulaFront'         => $name_cedulaFront,
-            'f_cedulaBack'          => $request->f_cedulaBack,
-            'f_selfie'              => $request->f_selfie,
-            'f_copiaruc'            => $request->f_copiaruc,
-            'f_adicional1'          => $request->f_adicional1,
-            'f_adicional2'          => $request->f_adicional2,
-            'f_adicional3'          => $request->f_adicional3,
-            'f_adicional4'          => $request->f_adicional4,
+            'f_cedulaBack'          => $name_cedulaBack,
+            'f_selfie'              => $name_selfie,
+            'f_copiaruc'            => $name_copiaruc,
+            'f_adicional1'          => $name_adicional1,
+            'f_adicional2'          => $name_adicional2,
+            'f_adicional3'          => $name_adicional3,
+            'f_adicional4'          => $name_adicional4,
             'mismos_datos_factu'    => $request->mismos_datos_factu,
             'fecha_deposito'        => $request->fecha_deposito,
             'num_deposito'          => $request->num_deposito,
@@ -130,6 +138,38 @@ class NatutalPersonController extends Controller
                 return redirect()->route('natural-person.create')->with('save', 'true');
             } 
         }
+    }
+
+    public function optimizeImage($file, $name, $numerodocumento){
+        $img = $file;
+        // NUEVO NOMBRES
+        $name_img = $name . '_' . $numerodocumento . '_' . time() . '.' . $img->guessExtension();
+        // PATH
+        $url_img = storage_path('app\public\img/' . $name . '/' . $name_img);
+        // OPTIMIZAR IMAGEN
+        $img_file =  Image::make($img);
+        $img_file->resize(333, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img_file->save($url_img);
+        Storage::disk('public')->get('img/' . $name . '/' . $name_img);
+
+        return $name_img;
+    }
+
+    public function uploadPDF($file, $name, $numerodocumento){
+        $pdf = $file;
+        
+        // NUEVO NOMBRES
+        $name_pdf = $name . '_' . $numerodocumento . '_' . time() . '.' . $pdf->guessExtension();
+        
+        // PATH
+        $url_pdf = storage_path('app\public\pdf/' . $name . '/' . $name_pdf);
+       
+        // SUBIR PDF
+        Storage::disk('public')->get('pdf/' . $name . '/' . $name_pdf);
+
+        return $name_pdf;
     }
 
     /**
